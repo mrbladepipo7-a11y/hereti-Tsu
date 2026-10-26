@@ -318,121 +318,140 @@
   }
 
 
-  // Interactive globe: a lightweight canvas sphere with rotating longitude/latitude,
-  // stylized continental silhouettes, and progressive focus from Earth to Hereti.
+  // Interactive Earth globe: use Three.js + public Earth texture when available;
+  // keep a self-contained canvas fallback for blocked CDNs or texture failures.
   const globeCanvas = $('#heretiGlobe');
   if (globeCanvas) {
-    const ctx = globeCanvas.getContext('2d');
+    const globeButtons = $$('.globe-controls [data-globe-stage]');
     const globeFocus = $('#globeFocus');
-    const globeButtons = $('.globe-controls [data-globe-stage]');
-    const reducedGlobeMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let globeStage = 0, globeRotation = 0, globeFrame = 0, globeLast = 0;
-    let globeWidth = 0, globeHeight = 0, globeDpr = 1;
     const stageNames = [
-      { label: 'EARTH / დედამიწა', lon: 35, lat: 32, zoom: 1 },
-      { label: 'EUROPE / ევროპა', lon: 25, lat: 48, zoom: 1.5 },
-      { label: 'GEORGIA / საქართველო', lon: 44, lat: 42, zoom: 2.15 },
-      { label: 'HERETI / ჰერეთი', lon: 46, lat: 41, zoom: 2.75 }
+      { label: 'EARTH / დედამიწა', lon: 12, lat: 22, distance: 4.35, zoom: 1 },
+      { label: 'EUROPE / ევროპა', lon: 18, lat: 48, distance: 3.65, zoom: 1.25 },
+      { label: 'GEORGIA / საქართველო', lon: 44.5, lat: 41.8, distance: 2.85, zoom: 1.75 },
+      { label: 'HERETI / ჰერეთი', lon: 46, lat: 41.5, distance: 2.12, zoom: 2.35 }
     ];
-    const continents = [
-      [[-168,72],[-140,70],[-125,55],[-110,48],[-95,20],[-80,8],[-62,12],[-52,48],[-80,70],[-115,78]],
-      [[-82,12],[-70,-5],[-78,-25],[-68,-55],[-45,-50],[-35,-5],[-52,8],[-62,12]],
-      [[-10,72],[28,70],[55,55],[42,35],[32,10],[10,-5],[-15,10],[-18,38],[-5,55]],
-      [[35,72],[80,75],[120,65],[160,55],[175,40],[145,20],[120,5],[105,-10],[80,5],[65,25],[45,35],[30,55]],
-      [[112,-12],[150,-10],[154,-35],[130,-45],[115,-30]],
-      [[-50,80],[-20,78],[-28,60],[-45,58],[-55,70]]
-    ];
-    function resizeGlobe() {
-      const rect = globeCanvas.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      globeWidth = rect.width; globeHeight = rect.height;
-      globeDpr = Math.min(window.devicePixelRatio || 1, 2);
-      globeCanvas.width = Math.round(globeWidth * globeDpr);
-      globeCanvas.height = Math.round(globeHeight * globeDpr);
-      ctx.setTransform(globeDpr,0,0,globeDpr,0,0);
-      drawGlobe();
+    let selectedStage = 0;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function setStage(next) {
+      selectedStage = Math.max(0, Math.min(3, Number(next) || 0));
+      globeButtons.forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.globeStage) === selectedStage)));
+      if (globeFocus) globeFocus.textContent = stageNames[selectedStage].label;
     }
-    function drawGlobe() {
-      if (!ctx || !globeWidth || !globeHeight) return;
-      const stage = stageNames[globeStage];
-      ctx.clearRect(0,0,globeWidth,globeHeight);
-      const cx=globeWidth*.5, cy=globeHeight*.48;
-      const baseRadius=Math.min(globeWidth*.34,globeHeight*.34,128);
-      const radius=baseRadius*(globeStage===0?1:1.05);
-      const glow=ctx.createRadialGradient(cx-radius*.25,cy-radius*.32,radius*.06,cx,cy,radius*1.5);
-      glow.addColorStop(0,'rgba(103,178,165,.28)');glow.addColorStop(1,'rgba(7,20,23,0)');
-      ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,radius*1.55,0,Math.PI*2);ctx.fill();
-      ctx.save();ctx.translate(cx,cy);ctx.scale(stage.zoom,stage.zoom);
-      const R=radius;
-      const sphere=ctx.createRadialGradient(-R*.34,-R*.38,R*.04,0,0,R*1.25);
-      sphere.addColorStop(0,'#3e8987');sphere.addColorStop(.58,'#1f5b67');sphere.addColorStop(1,'#0b222e');
-      ctx.fillStyle=sphere;ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.fill();
-      ctx.save();ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.clip();
-      const rot=globeRotation*Math.PI/180;
-      const targetLat=stage.lat*Math.PI/180;
-      function project(lon,lat){
-        const phi=lat*Math.PI/180, lambda=(lon-stage.lon)*Math.PI/180+rot;
-        const x=Math.cos(phi)*Math.sin(lambda);
-        const y=Math.sin(targetLat)*Math.cos(phi)*Math.cos(lambda)-Math.cos(targetLat)*Math.sin(phi);
-        const z=Math.sin(targetLat)*Math.sin(phi)+Math.cos(targetLat)*Math.cos(phi)*Math.cos(lambda);
-        return {x:x*R,y:y*R,z};
-      }
-      ctx.strokeStyle='rgba(202,231,215,.19)';ctx.lineWidth=.6;
-      for(let lat=-60;lat<=60;lat+=30){
-        ctx.beginPath();
-        for(let lon=-180;lon<=180;lon+=3){const p=project(lon,lat);if(lon===-180)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);}
-        ctx.stroke();
-      }
-      for(let lon=-150;lon<=180;lon+=30){
-        ctx.beginPath();
-        for(let lat=-88;lat<=88;lat+=3){const p=project(lon,lat);if(lat===-88)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);}
-        ctx.stroke();
-      }
-      continents.forEach(poly=>{
-        ctx.beginPath();let started=false;
-        for(let i=0;i<poly.length;i++){
-          const p=project(poly[i][0],poly[i][1]);
-          if(p.z<-.15){started=false;continue;}
-          if(!started){ctx.moveTo(p.x,p.y);started=true;}else ctx.lineTo(p.x,p.y);
-        }
-        ctx.closePath();ctx.fillStyle='rgba(157,185,125,.86)';ctx.fill();
-        ctx.strokeStyle='rgba(219,221,166,.42)';ctx.lineWidth=.7;ctx.stroke();
-      });
-      // Highlight the Caucasus / Hereti locator on the globe when the selected view permits it.
-      const caucasus=project(45.5,41.5);
-      if(caucasus.z>-.1){
-        ctx.beginPath();ctx.arc(caucasus.x,caucasus.y,Math.max(2.2,3.2/((globeStage+1)**.2)),0,Math.PI*2);
-        ctx.fillStyle='#e9d48b';ctx.fill();
-        ctx.beginPath();ctx.arc(caucasus.x,caucasus.y,7,0,Math.PI*2);ctx.strokeStyle='rgba(233,212,139,.62)';ctx.lineWidth=1;ctx.stroke();
-      }
-      ctx.restore();
-      ctx.strokeStyle='rgba(198,231,219,.68)';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.stroke();
-      ctx.restore();
-      if(globeFocus)globeFocus.textContent=stage.label;
-    }
-    function animateGlobe(now){
-      if(!globeLast)globeLast=now;
-      const delta=Math.min(32,now-globeLast);globeLast=now;
-      if(!reducedGlobeMotion && document.visibilityState==='visible'){
-        globeRotation=(globeRotation+delta*.006)%360;
-        drawGlobe();
-        globeFrame=window.requestAnimationFrame(animateGlobe);
-      }else globeFrame=0;
-    }
-    function setGlobeStage(next){
-      globeStage=Math.max(0,Math.min(3,Number(next)||0));
-      globeButtons.forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.globeStage)===globeStage)));
-      drawGlobe();
-    }
-    globeButtons.forEach(button=>button.addEventListener('click',()=>setGlobeStage(button.dataset.globeStage)));
-    if('ResizeObserver' in window)new ResizeObserver(resizeGlobe).observe(globeCanvas);
-    else window.addEventListener('resize',resizeGlobe,{passive:true});
-    document.addEventListener('visibilitychange',()=>{
-      if(document.visibilityState==='visible'&&!reducedGlobeMotion&&!globeFrame){globeLast=0;globeFrame=window.requestAnimationFrame(animateGlobe);}
-      else if(document.visibilityState!=='visible'&&globeFrame){cancelAnimationFrame(globeFrame);globeFrame=0;}
-    });
-    resizeGlobe();
-    if(!reducedGlobeMotion)globeFrame=window.requestAnimationFrame(animateGlobe);
-  }
+    globeButtons.forEach(button => button.addEventListener('click', () => setStage(button.dataset.globeStage)));
 
+    // The fallback draws a shaded globe immediately so the area never appears empty.
+    function drawFallback() {
+      const ctx = globeCanvas.getContext('2d');
+      if (!ctx) return;
+      let w = 0, h = 0, dpr = 1, rotation = 0, frame = 0, last = 0;
+      let currentZoom = 1, targetZoom = 1;
+      const shapes = [
+        [[-168,72],[-140,70],[-125,55],[-110,48],[-95,20],[-80,8],[-62,12],[-52,48],[-80,70],[-115,78]],
+        [[-82,12],[-70,-5],[-78,-25],[-68,-55],[-45,-50],[-35,-5],[-52,8],[-62,12]],
+        [[-10,72],[28,70],[55,55],[42,35],[32,10],[10,-5],[-15,10],[-18,38],[-5,55]],
+        [[35,72],[80,75],[120,65],[160,55],[175,40],[145,20],[120,5],[105,-10],[80,5],[65,25],[45,35],[30,55]],
+        [[112,-12],[150,-10],[154,-35],[130,-45],[115,-30]]
+      ];
+      function resize() {
+        const rect=globeCanvas.getBoundingClientRect(); if(!rect.width||!rect.height)return;
+        w=rect.width;h=rect.height;dpr=Math.min(devicePixelRatio||1,2);
+        globeCanvas.width=Math.round(w*dpr);globeCanvas.height=Math.round(h*dpr);
+        ctx.setTransform(dpr,0,0,dpr,0,0);draw();
+      }
+      function draw() {
+        if(!w||!h)return;
+        const stage=stageNames[selectedStage]; targetZoom=stage.zoom;
+        currentZoom += (targetZoom-currentZoom)*.08;
+        ctx.clearRect(0,0,w,h);
+        const cx=w/2,cy=h*.47,R=Math.min(w*.33,h*.34,136);
+        const halo=ctx.createRadialGradient(cx-R*.2,cy-R*.3,R*.1,cx,cy,R*1.55);
+        halo.addColorStop(0,'rgba(87,177,174,.32)');halo.addColorStop(1,'rgba(4,16,22,0)');
+        ctx.fillStyle=halo;ctx.beginPath();ctx.arc(cx,cy,R*1.5,0,Math.PI*2);ctx.fill();
+        ctx.save();ctx.translate(cx,cy);ctx.scale(currentZoom,currentZoom);
+        const sphere=ctx.createRadialGradient(-R*.38,-R*.42,R*.03,0,0,R*1.2);
+        sphere.addColorStop(0,'#5b9e9c');sphere.addColorStop(.5,'#246a7a');sphere.addColorStop(1,'#071b2a');
+        ctx.fillStyle=sphere;ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.fill();ctx.save();ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.clip();
+        function project(lon,lat){const p=(lon-stage.lon+rotation*.08)*Math.PI/180, t=lat*Math.PI/180, cent=stage.lat*Math.PI/180;return{x:R*Math.cos(t)*Math.sin(p),y:R*(Math.sin(cent)*Math.cos(t)*Math.cos(p)-Math.cos(cent)*Math.sin(t)),z:Math.sin(cent)*Math.sin(t)+Math.cos(cent)*Math.cos(t)*Math.cos(p)}}
+        ctx.strokeStyle='rgba(202,235,227,.14)';ctx.lineWidth=.6;
+        for(let lat=-60;lat<=60;lat+=30){ctx.beginPath();for(let lon=-180;lon<=180;lon+=3){const p=project(lon,lat);if(lon===-180)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.stroke()}
+        for(let lon=-150;lon<=180;lon+=30){ctx.beginPath();for(let lat=-85;lat<=85;lat+=3){const p=project(lon,lat);if(lat===-85)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.stroke()}
+        shapes.forEach(poly=>{ctx.beginPath();let open=false;poly.forEach(([lon,lat])=>{const p=project(lon,lat);if(p.z<0){open=false;return}if(!open){ctx.moveTo(p.x,p.y);open=true}else ctx.lineTo(p.x,p.y)});ctx.closePath();ctx.fillStyle='#719a77';ctx.fill();ctx.strokeStyle='rgba(226,221,170,.55)';ctx.stroke()});
+        const mark=project(46,41.5);if(mark.z>0){ctx.fillStyle='#f2d98c';ctx.beginPath();ctx.arc(mark.x,mark.y,3.5,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#f2d98c88';ctx.beginPath();ctx.arc(mark.x,mark.y,8,0,Math.PI*2);ctx.stroke()}
+        ctx.restore();ctx.strokeStyle='rgba(215,240,229,.7)';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.stroke();ctx.restore();
+      }
+      function animate(now){if(!last)last=now;const dt=Math.min(32,now-last);last=now;if(!reducedMotion&&document.visibilityState==='visible')rotation=(rotation+dt*.5)%360;draw();frame=requestAnimationFrame(animate)}
+      if('ResizeObserver'in window)new ResizeObserver(resize).observe(globeCanvas);else window.addEventListener('resize',resize);
+      resize();if(!reducedMotion)frame=requestAnimationFrame(animate);
+      return {stop(){cancelAnimationFrame(frame)}};
+    }
+    const fallback = drawFallback();
+    function loadThree() {
+      if (window.THREE) { initThree(window.THREE); return; }
+      const script=document.createElement('script');
+      script.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+      script.async=true;
+      script.onload=()=>{if(window.THREE)initThree(window.THREE)};
+      script.onerror=()=>{};
+      document.head.appendChild(script);
+    }
+    function initThree(THREE) {
+      try {
+        const rect=globeCanvas.getBoundingClientRect();
+        if(!rect.width||!rect.height)return;
+        const renderCanvas=document.createElement('canvas');
+        renderCanvas.className='hereti-globe hereti-globe-webgl';
+        renderCanvas.setAttribute('aria-label','რეალისტური სამგანზომილებიანი დედამიწა, ევროპის, საქართველოსა და ჰერეთის ხედებით');
+        renderCanvas.setAttribute('role','img');
+        globeCanvas.parentNode.insertBefore(renderCanvas,globeCanvas);
+        const renderer=new THREE.WebGLRenderer({canvas:renderCanvas,alpha:true,antialias:true,powerPreference:'high-performance'});
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+        renderer.setSize(rect.width,rect.height,false);
+        renderer.outputColorSpace=THREE.SRGBColorSpace;
+        const scene=new THREE.Scene();
+        const camera=new THREE.PerspectiveCamera(35,rect.width/rect.height,.1,100);
+        camera.position.z=stageNames[0].distance;
+        scene.add(new THREE.AmbientLight(0x9dbacb,1.65));
+        const keyLight=new THREE.DirectionalLight(0xffffff,2.4);keyLight.position.set(-3,2,5);scene.add(keyLight);
+        const fillLight=new THREE.DirectionalLight(0x5a9cba,.9);fillLight.position.set(4,-1,-3);scene.add(fillLight);
+        const earthPivot=new THREE.Group();scene.add(earthPivot);
+        const geometry=new THREE.SphereGeometry(1.12,96,72);
+        const loader=new THREE.TextureLoader();loader.crossOrigin='anonymous';
+        const earthMaterial=new THREE.MeshPhongMaterial({color:0xffffff,specular:new THREE.Color(0x263d4a),shininess:12});
+        const earth=new THREE.Mesh(geometry,earthMaterial);earthPivot.add(earth);
+        const cloudsMaterial=new THREE.MeshPhongMaterial({color:0xffffff,transparent:true,opacity:.15,depthWrite:false});
+        const clouds=new THREE.Mesh(new THREE.SphereGeometry(1.128,64,48),cloudsMaterial);earthPivot.add(clouds);
+        loader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg',texture=>{texture.colorSpace=THREE.SRGBColorSpace;earthMaterial.map=texture;earthMaterial.needsUpdate=true;},undefined,()=>{earthMaterial.color.set(0x2e7180)});
+        loader.load('https://threejs.org/examples/textures/planets/earth_clouds_1024.png',texture=>{texture.colorSpace=THREE.SRGBColorSpace;cloudsMaterial.map=texture;cloudsMaterial.needsUpdate=true;},undefined,()=>{clouds.visible=false});
+        const atmosphere=new THREE.Mesh(new THREE.SphereGeometry(1.17,64,48),new THREE.MeshBasicMaterial({color:0x5ebad0,transparent:true,opacity:.13,side:THREE.BackSide}));earthPivot.add(atmosphere);
+        const starPositions=[];for(let i=0;i<900;i++){const theta=Math.random()*Math.PI*2,phi=Math.acos(2*Math.random()-1),r=8+Math.random()*10;starPositions.push(r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta))}
+        const starGeo=new THREE.BufferGeometry();starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starPositions,3));
+        scene.add(new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xd8e8ee,size:.025,transparent:true,opacity:.75})));
+        const markerGroup=new THREE.Group();earthPivot.add(markerGroup);
+        function latLonVector(lon,lat,radius=1.145){const phi=(90-lat)*Math.PI/180,theta=(lon+180)*Math.PI/180;return new THREE.Vector3(-radius*Math.sin(phi)*Math.cos(theta),radius*Math.cos(phi),radius*Math.sin(phi)*Math.sin(theta))}
+        const markerPos=latLonVector(46,41.5,1.145);
+        const pin=new THREE.Mesh(new THREE.SphereGeometry(.025,16,12),new THREE.MeshBasicMaterial({color:0xffdf8e}));pin.position.copy(markerPos);markerGroup.add(pin);
+        const ring=new THREE.Mesh(new THREE.TorusGeometry(.055,.004,8,48),new THREE.MeshBasicMaterial({color:0xffdf8e,transparent:true,opacity:.9}));ring.position.copy(markerPos.clone().multiplyScalar(1.02));ring.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),markerPos.clone().normalize());markerGroup.add(ring);
+        // A longitude/latitude target rotation is eased every frame, never snapped.
+        let targetY=0,targetX=0,targetDistance=stageNames[0].distance;
+        function setTarget(){const s=stageNames[selectedStage];targetY=-s.lon*Math.PI/180-Math.PI/2;targetX=s.lat*Math.PI/180;targetDistance=s.distance}
+        setTarget();
+        let frame=0,last=0,alive=true;
+        function resize(){const box=globeCanvas.getBoundingClientRect();if(!box.width||!box.height)return;renderer.setSize(box.width,box.height,false);camera.aspect=box.width/box.height;camera.updateProjectionMatrix()}
+        function animate(now){if(!alive)return;const dt=last?Math.min((now-last)/1000,.05):0;last=now;
+          if(!reducedMotion){earth.rotation.y+=dt*.045;clouds.rotation.y+=dt*.055}
+          const s=stageNames[selectedStage];targetY=-s.lon*Math.PI/180-Math.PI/2;targetX=s.lat*Math.PI/180;targetDistance=s.distance;
+          earthPivot.rotation.y+=(targetY-earthPivot.rotation.y)*.045;earthPivot.rotation.x+=(targetX-earthPivot.rotation.x)*.045;
+          camera.position.z+=(targetDistance-camera.position.z)*.055;
+          renderer.render(scene,camera);frame=requestAnimationFrame(animate)}
+        globeButtons.forEach(button=>button.addEventListener('click',()=>{selectedStage=Math.max(0,Math.min(3,Number(button.dataset.globeStage)||0))}));
+        if('ResizeObserver'in window)new ResizeObserver(resize).observe(globeCanvas);else window.addEventListener('resize',resize);
+        globeCanvas.style.display='none';renderCanvas.style.display='block';
+        if(fallback)fallback.stop();
+        animate(0);
+      } catch(error) {
+        // The 2D fallback stays visible if WebGL cannot initialize.
+      }
+    }
+    loadThree();
+  }
 })();
