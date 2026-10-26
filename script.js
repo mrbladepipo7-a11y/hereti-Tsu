@@ -368,10 +368,13 @@
       sphere.addColorStop(0,'#3e8987');sphere.addColorStop(.58,'#1f5b67');sphere.addColorStop(1,'#0b222e');
       ctx.fillStyle=sphere;ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.fill();
       ctx.save();ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.clip();
-      const rot=(globeRotation-stage.lon)*Math.PI/180;
+      const rot=globeRotation*Math.PI/180;
+      const targetLat=stage.lat*Math.PI/180;
       function project(lon,lat){
-        const phi=lat*Math.PI/180, lambda=lon*Math.PI/180+rot;
-        const x=Math.cos(phi)*Math.sin(lambda), y=-Math.sin(phi), z=Math.cos(phi)*Math.cos(lambda);
+        const phi=lat*Math.PI/180, lambda=(lon-stage.lon)*Math.PI/180+rot;
+        const x=Math.cos(phi)*Math.sin(lambda);
+        const y=Math.sin(targetLat)*Math.cos(phi)*Math.cos(lambda)-Math.cos(targetLat)*Math.sin(phi);
+        const z=Math.sin(targetLat)*Math.sin(phi)+Math.cos(targetLat)*Math.cos(phi)*Math.cos(lambda);
         return {x:x*R,y:y*R,z};
       }
       ctx.strokeStyle='rgba(202,231,215,.19)';ctx.lineWidth=.6;
@@ -398,7 +401,7 @@
       // Highlight the Caucasus / Hereti locator on the globe when the selected view permits it.
       const caucasus=project(45.5,41.5);
       if(caucasus.z>-.1){
-        ctx.beginPath();ctx.arc(caucasus.x,caucasus.y,Math.max(2.2,3.2/globeStage**.2),0,Math.PI*2);
+        ctx.beginPath();ctx.arc(caucasus.x,caucasus.y,Math.max(2.2,3.2/((globeStage+1)**.2)),0,Math.PI*2);
         ctx.fillStyle='#e9d48b';ctx.fill();
         ctx.beginPath();ctx.arc(caucasus.x,caucasus.y,7,0,Math.PI*2);ctx.strokeStyle='rgba(233,212,139,.62)';ctx.lineWidth=1;ctx.stroke();
       }
