@@ -104,6 +104,120 @@
     });
   });
 
+  // Cinematic motion system (GSAP is progressive enhancement; native CSS remains the fallback).
+  const topbar = $('.topbar');
+  const cursorGlow = document.createElement('div');
+  cursorGlow.className = 'cursor-glow';
+  cursorGlow.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(cursorGlow);
+
+  if (!reducedMotion && window.matchMedia('(pointer:fine)').matches) {
+    window.addEventListener('pointermove', event => {
+      cursorGlow.style.opacity = '1';
+      cursorGlow.style.left = `${event.clientX}px`;
+      cursorGlow.style.top = `${event.clientY}px`;
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => { cursorGlow.style.opacity = '0'; });
+  }
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      topbar?.classList.toggle('scrolled', window.scrollY > 24);
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  if (window.gsap && !reducedMotion) {
+    gsap.registerPlugin(window.ScrollTrigger);
+    gsap.config({ nullTargetWarn: false });
+
+    // Opening sequence: editorial title, then supporting copy, then the landscape.
+    const heroTitle = $('.hero-title');
+    if (heroTitle) {
+      gsap.fromTo(heroTitle.querySelector('span'),
+        { yPercent: 115, rotate: 2, scale: .94, transformOrigin: 'left bottom' },
+        { yPercent: 0, rotate: 0, scale: 1, duration: 1.35, ease: 'power4.out', delay: .12 });
+      gsap.fromTo(heroTitle.querySelector('em'),
+        { y: 48, autoAlpha: 0, skewY: 3 },
+        { y: 0, autoAlpha: 1, skewY: 0, duration: 1.1, ease: 'power3.out', delay: .38 });
+      gsap.fromTo('.hero-art .sun-disc',
+        { scale: .72, autoAlpha: 0, rotate: -12 },
+        { scale: 1, autoAlpha: 1, rotate: 0, duration: 1.7, ease: 'power3.out', delay: .22 });
+      gsap.fromTo('.hero-art .ridge',
+        { y: 90, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 1.5, stagger: .13, ease: 'power4.out', delay: .35 });
+    }
+
+    // Large landscape moves against the page scroll for a cinematic depth effect.
+    if (window.ScrollTrigger && $('.hero-art')) {
+      gsap.to('.hero-art', {
+        yPercent: 16, scale: 1.06, rotate: -2,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.1 }
+      });
+      gsap.to('.hero-copy', {
+        y: -70, autoAlpha: .2, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+      });
+      gsap.to('.hero-grid', {
+        yPercent: 20, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.3 }
+      });
+    }
+
+    // Editorial heading reveals and card entrances are staggered as each chapter enters.
+    $$('.cinematic-section').forEach((section, sectionIndex) => {
+      const heading = $('.heading-main h2', section);
+      if (heading) {
+        gsap.fromTo(heading,
+          { y: 70, autoAlpha: 0, clipPath: 'inset(0 0 100% 0)' },
+          { y: 0, autoAlpha: 1, clipPath: 'inset(0 0 0% 0)', duration: 1.15, ease: 'power4.out',
+            scrollTrigger: { trigger: heading, start: 'top 88%', once: true } });
+      }
+      const cards = $$('.term-card, .mini-card, .heritage-card, .source-row, .kingdom-step, .timeline-item', section);
+      if (cards.length) {
+        gsap.fromTo(cards,
+          { y: 45, autoAlpha: 0, rotateX: 2 },
+          { y: 0, autoAlpha: 1, rotateX: 0, duration: .9, stagger: .095, ease: 'power3.out',
+            clearProps: 'transform', scrollTrigger: { trigger: cards[0], start: 'top 91%', once: true } });
+      }
+      const sectionArt = $$('.origin-image, .geo-map-card, .kingdom-banner, .faith-art', section);
+      sectionArt.forEach(art => {
+        gsap.fromTo(art,
+          { y: 42, scale: .97, autoAlpha: .6 },
+          { y: 0, scale: 1, autoAlpha: 1, duration: 1.15, ease: 'power3.out',
+            scrollTrigger: { trigger: art, start: 'top 92%', once: true } });
+      });
+      section.style.setProperty('--chapter-index', sectionIndex + 1);
+    });
+
+    // Subtle scroll-linked image movement, not a distracting constant animation.
+    if (window.ScrollTrigger) {
+      $$('.heritage-photo, .origin-image').forEach(art => {
+        gsap.fromTo(art, { backgroundPosition: '50% 58%' }, {
+          backgroundPosition: '50% 42%', ease: 'none',
+          scrollTrigger: { trigger: art, start: 'top bottom', end: 'bottom top', scrub: .8 }
+        });
+      });
+    }
+
+    // Magnetic micro-interaction on primary buttons for mouse users only.
+    if (window.matchMedia('(pointer:fine)').matches) {
+      $$('.button').forEach(button => {
+        button.addEventListener('pointermove', event => {
+          const rect = button.getBoundingClientRect();
+          const dx = (event.clientX - rect.left - rect.width / 2) * .08;
+          const dy = (event.clientY - rect.top - rect.height / 2) * .12;
+          gsap.to(button, { x: dx, y: dy, duration: .35, ease: 'power3.out', overwrite: true });
+        });
+        button.addEventListener('pointerleave', () => gsap.to(button, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.45)', overwrite: true }));
+      });
+    }
+  }
+
   // Navigation active section hint
   const navLinks = $$('.desktop-nav a');
   const sections = navLinks.map(link => $(link.getAttribute('href'))).filter(Boolean);
