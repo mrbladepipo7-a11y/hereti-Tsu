@@ -274,7 +274,7 @@
   });
 
   // Monument field-note panels: each site opens its own animated research note.
-  $('.monument-card').forEach((card, index) => {
+  $$('.monument-card').forEach((card, index) => {
     const title = $('h3', card);
     const description = $('p', card);
     if (!title || !description) return;
@@ -311,7 +311,7 @@
         }
       });
     }, { threshold: .22 });
-    $('.journey-stop').forEach((stop, index) => {
+    $$('.journey-stop').forEach((stop, index) => {
       stop.style.transitionDelay = (index * 110) + 'ms';
       journeyObserver.observe(stop);
     });
