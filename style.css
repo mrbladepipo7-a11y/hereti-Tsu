@@ -301,3 +301,47 @@ body{cursor:default}
 .caucasus-map-header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;border-bottom:1px solid #6b5838}.caucasus-map-header h3{margin:8px 0 0;font-size:clamp(19px,2vw,27px);font-weight:500}.map-note-badge{font-size:10px;letter-spacing:.06em;color:#e1c78f;border:1px solid #8b7449;padding:8px 11px;white-space:nowrap}
 .caucasus-map-art{padding:12px;background:#d7c69e}.caucasus-map-art svg{display:block;width:100%;height:auto;box-shadow:0 8px 28px #0002}.caucasus-map-caption{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:18px 24px;color:#c8c0ac;font-size:12px;line-height:1.8}.caucasus-map-caption p{margin:0}.caucasus-map-caption b{color:#e5c889}
 @media(max-width:620px){.caucasus-map-header{align-items:flex-start;flex-direction:column;padding:17px}.caucasus-map-caption{grid-template-columns:1fr;gap:10px;padding:16px}.caucasus-map-art{padding:5px}}
+
+
+/* ===== HERETI / cinematic discovery interface refresh ===== */
+:root{--ink:#f0f0f1;--ink-2:#202126;--paper:#15161a;--paper-2:#222329;--lime:#e5b86b;--lime-glow:rgba(229,184,107,.24);--gold:#e5b86b;--muted:#a5a6ad;--line:rgba(255,255,255,.12);--dark-line:rgba(255,255,255,.12);--accent:#8b8fe7;--gutter:clamp(16px,3.8vw,62px)}
+html{background:#15161a;color-scheme:dark}body{background:radial-gradient(ellipse at 78% 6%,#33323b 0,transparent 33%),#15161a;color:#f0f0f1}
+.noise{opacity:.025}.reading-progress{background:linear-gradient(90deg,#d9a85e,#b8a8ff,#e7d6b5)}
+.topbar{height:76px;background:rgba(24,25,30,.76);border-bottom:1px solid rgba(255,255,255,.09);backdrop-filter:blur(24px);box-shadow:0 10px 40px #0002}
+.brand-mark{border-radius:12px;background:linear-gradient(145deg,#dcb777,#85633e);color:#171719;box-shadow:0 5px 22px #dcb77722}
+.brand-name{color:#f6f2eb}.brand-name span{color:#aaa7a1}.desktop-nav a{color:#c5c4ca}.desktop-nav a:hover,.desktop-nav a:focus-visible{color:#e8bf7d}
+.menu-toggle{border-color:#ffffff30;color:#fff}.menu-toggle span{background:#eee}
+.mobile-menu{background:rgba(20,21,26,.97);color:#f4f0e8}.mobile-menu-inner>a{border-color:#ffffff18}.mobile-menu-note{color:#d7b578}
+.hero{min-height:min(850px,100svh);padding-top:116px;background:radial-gradient(ellipse at 72% 45%,#47444a 0,transparent 39%),linear-gradient(120deg,#17181c,#25252b 65%,#17181c);color:#f5f1e9}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,18,22,.98) 0%,rgba(17,18,22,.82) 38%,rgba(17,18,22,.12) 100%);z-index:0;pointer-events:none}
+.hero-grid{opacity:.12;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:80px 80px}
+.hero-copy{z-index:2;max-width:760px}.hero .eyebrow{color:#d0c8bb}.eyebrow-dot{background:#e2b56c;box-shadow:0 0 16px #e2b56c}
+.hero-title{color:#fff}.hero-title em{color:#d9c4a1}.hero-intro{color:#c5c3c4;max-width:580px}
+.button-lime{background:#e3b56e;color:#17171a;border-radius:9px;box-shadow:0 8px 28px #e3b56e20}.button-lime:hover{background:#f1ca8b;transform:translateY(-2px)}
+.hero-caption{color:#aaa8ad}.hero-caption b{color:#d8b67d}
+.hero-art{opacity:.96;filter:saturate(.76);transform:scale(1.05);transform-origin:center right}
+.sun-disc{background:radial-gradient(circle at 38% 35%,#fff1ce,#d3a566 45%,#7e5b48 73%,transparent 74%);box-shadow:0 0 110px #d3a56638}
+.ridge-back{background:linear-gradient(160deg,#5d625f,#33383b 55%,#25292b)}.ridge-mid{background:linear-gradient(160deg,#4b5049,#242a28 65%,#171b1a)}.ridge-front{background:linear-gradient(160deg,#363d37,#1b211f 70%,#101312)}
+.river{filter:brightness(.8)}.hero-coordinate,.art-label{color:#e0c18e}.hero-stamp{border-color:#e0c18e;color:#e0c18e;background:#16171b88;backdrop-filter:blur(8px)}
+.hero-bottom{border-color:#ffffff20;color:#b7b5ba}.scroll-cue{color:#e4bd7a}
+.intro-strip{background:#202126;color:#f1eee8;border-block:1px solid #ffffff10}.intro-strip-copy,.small-note{color:#aaaab1}.big-statement{color:#f4efe6}
+.section,.section-pad,.cinematic-section{background:#17181c;color:#eeedf0}
+.section-heading{color:#f0edf0}.section-kicker{color:#c5a26b}.heading-main h2{color:#f6f1e9}.heading-main h2 i{color:#d8bd91}.heading-main p{color:#aaaab2}
+.journey-section{background:linear-gradient(180deg,#1b1c21,#141519)}.journey-intro,.journey-footnote{color:#b4b2ba}.globe-model-note{color:#d6bb8e}
+.journey-stop,.journey-step{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:14px;box-shadow:0 15px 45px #0002;overflow:hidden}
+.journey-stop:hover,.journey-step:hover{border-color:#d8b77966;transform:translateY(-3px)}.journey-label{color:#e2c28e}.journey-connector{background:#d6b67d}
+.geography{background:linear-gradient(180deg,#15161a,#202126)}.geo-map-card{border:1px solid #ffffff19;border-radius:18px;overflow:hidden;box-shadow:0 22px 70px #0005;background:#202126}.map-topline{background:#25262c;color:#d6c7aa;border-color:#ffffff12}.map-live{color:#a5d8b3}.map-visual{filter:saturate(.78) contrast(1.05)}.map-legend{background:#202126;color:#d7d3cb;border-color:#ffffff15}.map-disclaimer{color:#aaa6a1}.geo-copy{color:#eeedf0}.number-callout{background:#25262c;border:1px solid #ffffff12;border-radius:12px;color:#e5bd7c}
+.text-block{color:#c4c1c7}.text-block h3,.text-block h4{color:#f3eadb}
+.atlas-intro p,.atlas-note{color:#d0c9ba}.atlas-note{background:#2a2925;border-left-color:#d2ad6b}
+.historical-maps-section{background:#1b1b1e;color:#f2eee6}.historical-maps-section .heading-main h2{color:#f6f0e7}.historical-maps-section .heading-main p{color:#bdb7ad}
+.atlas-map-frame{border-color:#5d513d;box-shadow:0 22px 55px #0004}.atlas-timeline .atlas-era{background:#24252a;color:#e9e5dd;border-color:#ffffff17;border-radius:10px}.atlas-timeline .atlas-era.is-active{background:#d7b474;color:#1d1b18;border-color:#d7b474}.atlas-note{background:#26251f;color:#d3c8b2}
+.caucasus-context-section{background:#17181c;color:#eee2c5}
+.monument-card,.ruler-card,.timeline-card,.campaign-card{background:linear-gradient(145deg,#24252a,#191a1e);border:1px solid #ffffff15;border-radius:14px;box-shadow:0 14px 38px #0002}
+.monument-card:hover,.ruler-card:hover,.timeline-card:hover,.campaign-card:hover{border-color:#d4b16d77;transform:translateY(-4px);box-shadow:0 22px 50px #0004}
+.monument-card h3,.monument-card h2{color:#f5e9d4}.monument-card p{color:#c2bdba}.monument-card b{color:#e2bd7a}
+footer,.site-footer{background:#111216;color:#aaa8ad;border-top:1px solid #ffffff12}
+button:not(.button):not(.menu-toggle){transition:background .25s,border-color .25s,color .25s,transform .25s}
+::selection{background:#d7b474;color:#151515}
+@media(max-width:1050px){.desktop-nav{gap:12px}.desktop-nav a{font-size:11px}}
+@media(max-width:820px){.topbar{height:68px}.hero{min-height:760px;padding-top:110px}.hero:before{background:linear-gradient(180deg,rgba(17,18,22,.82),rgba(17,18,22,.52) 60%,#17181c 100%)}.hero-art{opacity:.56;transform:scale(1.12);position:absolute;inset:12% -20% 0 0}.hero-copy{position:relative}.desktop-nav{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
