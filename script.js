@@ -454,4 +454,25 @@
     }
     loadThree();
   }
+
+  const atlasButtons = $$('.atlas-era');
+  const atlasTitle = $('#atlasEraTitle');
+  const atlasNote = $('#atlasEraNote');
+  const atlasTerritory = $('#atlasMap .atlas-territory');
+  const atlasNeighbours = $$('#atlasMap .atlas-neighbour');
+  const atlasData = [
+    {title:'VIII–IX საუკუნეები',note:'VIII–IX საუკუნეებში ჰერეთი ცალკე პოლიტიკურ ერთეულად ყალიბდებოდა. რუკა ისტორიული არეალის ზოგად წარმოდგენას იძლევა და არა ზუსტ საზღვარს.',fill:'#b69b61',opacity:.62,transform:'translate(0 0)'},
+    {title:'X საუკუნე',note:'X საუკუნეში ჰერეთის პოლიტიკური გავლენა ძლიერდებოდა. წყაროებში საზღვრები ერთნაირად არ არის განსაზღვრული, ამიტომ ნაჩვენებია პირობითი არეალი.',fill:'#a9894f',opacity:.72,transform:'translate(8px,-4px)'},
+    {title:'XI საუკუნე',note:'XI საუკუნეში ჰერეთისა და კახეთის პოლიტიკური ურთიერთობა და გაერთიანების პროცესი რეგიონს ახალ კონტექსტში აქცევს.',fill:'#9b9f71',opacity:.58,transform:'translate(14px,2px)'},
+    {title:'შემდგომი ეპოქები',note:'მომდევნო საუკუნეებში ადმინისტრაციული სახელები და პოლიტიკური საზღვრები იცვლებოდა. ეს რუკა თანამედროვე საზღვრების ზუსტ ასახვას არ წარმოადგენს.',fill:'#a7b69a',opacity:.48,transform:'translate(3px,7px)'}
+  ];
+  atlasButtons.forEach(button=>button.addEventListener('click',()=>{
+    const item=atlasData[Number(button.dataset.atlasEra)||0];
+    atlasButtons.forEach(b=>b.classList.toggle('is-active',b===button));
+    if(atlasTitle)atlasTitle.textContent=item.title;
+    if(atlasNote)atlasNote.textContent=item.note;
+    if(atlasTerritory){atlasTerritory.style.fill=item.fill;atlasTerritory.style.fillOpacity=String(item.opacity);atlasTerritory.style.transform=item.transform;}
+    atlasNeighbours.forEach((shape,i)=>{shape.style.fill=i===0?'#9baf92':'#b5c2b0';shape.style.fillOpacity=String(.45+Number(button.dataset.atlasEra)*.04)});
+  }));
+
 })();
