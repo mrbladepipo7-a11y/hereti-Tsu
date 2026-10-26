@@ -153,3 +153,60 @@ body{cursor:default}
   .cursor-glow,.button-lime:hover{box-shadow:none!important;transform:none!important}
   .reveal{opacity:1;transform:none;transition:none}
 }
+
+
+/* === HERETI ATLAS: journey, campaign map, ruler portraits and monument interactions === */
+.journey-section{background:#e7e4d6;color:#172017;overflow:hidden}
+.journey-intro{display:flex;justify-content:space-between;gap:30px;align-items:end;margin:0 0 34px;padding-bottom:22px;border-bottom:1px solid rgba(23,32,23,.2)}
+.journey-intro p{max-width:660px;font-size:clamp(17px,2vw,24px);line-height:1.6;margin:0}
+.journey-intro>span,.journey-step,.journey-footnote{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#66715d}
+.journey-track{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:14px;align-items:center}
+.journey-stop{min-width:0}
+.journey-art{height:clamp(150px,19vw,245px);position:relative;overflow:hidden;background:#18241d;border:1px solid rgba(20,30,20,.18);display:grid;place-items:center}
+.journey-step{display:block;margin:18px 0 9px}.journey-stop h3{font-size:clamp(18px,2vw,25px);margin:0 0 8px}.journey-stop p{font-size:14px;line-height:1.65;color:#68705f;margin:0}
+.journey-connector{font-size:25px;color:#77825e;align-self:center;margin-top:-80px}
+.earth-art{background:radial-gradient(circle at 45% 42%,#466d7a,#1b353d 55%,#111a1b)}
+.earth-glow{position:absolute;width:130px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#a9d9cc,#417e8a 55%,#203e53);box-shadow:0 0 45px #77b8b055,inset -17px -12px 28px #0a171c;overflow:hidden}
+.earth-grid{position:absolute;width:130px;aspect-ratio:1;border-radius:50%;z-index:2;border:1px solid #c5e4dc55;background:repeating-linear-gradient(0deg,transparent 0 20px,#d4eee433 21px 22px),repeating-linear-gradient(90deg,transparent 0 25px,#d4eee433 26px 27px);clip-path:circle(50%)}
+.earth-land{position:absolute;z-index:3;background:#a6bf82;filter:drop-shadow(0 0 4px #b7ce8c66);border-radius:45% 55% 40% 60%}
+.land-one{width:35px;height:56px;transform:rotate(28deg);left:44%;top:32%;clip-path:polygon(35% 0,100% 15%,78% 45%,100% 70%,55% 100%,20% 72%,0 35%)}
+.land-two{width:25px;height:38px;left:34%;top:52%;transform:rotate(-24deg);clip-path:polygon(30% 0,100% 30%,75% 70%,45% 100%,0 55%)}
+.europe-art{background:linear-gradient(140deg,#c6c7a5,#6c816a)}
+.continent-shape{width:72%;height:80%;background:#dce1bd;clip-path:polygon(16% 6%,38% 0,49% 12%,68% 8%,73% 22%,93% 28%,81% 44%,69% 48%,74% 66%,55% 72%,48% 92%,34% 77%,29% 57%,13% 48%,5% 29%);filter:drop-shadow(0 10px 12px #14231b55)}
+.georgia-art{background:radial-gradient(circle at 52% 50%,#b7c58d,#5e795f 75%)}
+.georgia-shape{width:58%;height:68%;background:#e8e3c9;clip-path:polygon(9% 22%,31% 8%,48% 18%,62% 5%,76% 27%,95% 32%,81% 52%,90% 69%,62% 74%,47% 94%,30% 72%,10% 68%,21% 47%)}
+.hereti-art{background:radial-gradient(circle at 50% 48%,#dfc784,#536b4d 80%)}
+.hereti-shape{width:65%;height:68%;background:#e7d8a4;clip-path:polygon(18% 3%,45% 13%,64% 5%,87% 27%,78% 43%,96% 59%,72% 73%,57% 94%,36% 78%,17% 83%,5% 55%,20% 37%);border:1px dashed #394b36}
+.journey-pin{position:absolute;width:10px;height:10px;background:#cf593a;border:2px solid #f4edcf;border-radius:50%;left:55%;top:47%;box-shadow:0 0 0 8px #cf593a33;animation:pinPulse 2.2s infinite}
+.journey-label{position:absolute;bottom:14px;left:15px;font:10px var(--mono);letter-spacing:.13em;color:#f4f0df}
+.journey-footnote{margin:25px 0 0;line-height:1.7}
+@keyframes pinPulse{0%,100%{box-shadow:0 0 0 5px #cf593a33}50%{box-shadow:0 0 0 13px #cf593a00}}
+.campaign-panel{margin-top:50px;padding:clamp(20px,4vw,42px);background:#111b14;color:#f3f0e4;border:1px solid #3b4938}
+.campaign-heading{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:24px}
+.campaign-kicker{font:10px var(--mono);letter-spacing:.15em;color:#b4d56c}
+.campaign-heading h3{font-size:clamp(25px,3.4vw,43px);line-height:1.1;margin:12px 0 0}.campaign-heading h3 i{font-family:var(--serif);font-weight:400;color:#d4b56a}
+.campaign-heading>p{max-width:280px;color:#aab3a3;font-size:13px;line-height:1.7;margin:0}
+.campaign-map{border:1px solid #4a5944;overflow:hidden}.campaign-map svg{display:block;width:100%;height:auto}
+.campaign-commanders{display:grid;grid-template-columns:1fr 50px 1fr;gap:18px;align-items:stretch;margin-top:20px}
+.commander-card{padding:22px;border:1px solid #43503e;background:#1b281e}.commander-card>span{font:10px var(--mono);letter-spacing:.1em;color:#b6c2aa}.commander-card h4{font-size:clamp(18px,2vw,25px);margin:14px 0 8px}.commander-card p{font-size:13px;line-height:1.75;color:#c2c9bb;margin:0}.commander-arab{border-top:3px solid #d4b56a}.commander-local{border-top:3px solid #b4d56c}.campaign-vs{display:grid;place-items:center;font:11px var(--mono);color:#9da78e}
+.campaign-caution{font-size:12px;line-height:1.75;color:#aab3a3;margin:22px 0 0;padding-top:17px;border-top:1px solid #3b4938}
+.ruler-portraits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:32px 0 42px}
+.ruler-portrait{padding:12px 12px 18px;background:#e8e4d7;border:1px solid #d0cbb9;transition:transform .45s,border-color .3s}.ruler-portrait:hover{transform:translateY(-6px);border-color:#9ba77e}
+.ruler-bust{height:210px;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,#697d5c,#26372a 72%);isolation:isolate}
+.ruler-bust:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 16px,#ffffff08 17px 18px)}
+.bust-head{position:absolute;z-index:2;top:45px;width:62px;height:83px;border-radius:45% 45% 40% 40%;background:linear-gradient(90deg,#7d5c42,#c19a72 45%,#76543c);box-shadow:inset -10px 0 0 #3c3229}
+.bust-head:before{content:"";position:absolute;top:22px;left:10px;width:43px;height:5px;background:#2a2922;box-shadow:0 20px 0 -1px #30251d}
+.bust-cloak{position:absolute;z-index:1;top:112px;width:148px;height:135px;border-radius:55% 55% 0 0;background:linear-gradient(90deg,#19291e,#536649 50%,#1a291e);clip-path:polygon(24% 0,76% 0,100% 100%,0 100%)}
+.crown{position:absolute;z-index:4;top:25px;color:#d8bd77;font-size:28px;text-shadow:0 0 16px #d8bd7733}
+.bust-mark{position:absolute;z-index:5;bottom:12px;right:12px;font:10px var(--mono);color:#d9d2b5;letter-spacing:.1em}
+.bust-ishkhanik{background:radial-gradient(circle at 50% 30%,#777d64,#1d2923 75%)}.bust-ishkhanik .bust-cloak{background:linear-gradient(90deg,#343d31,#a18b5b,#303a2e)}
+.bust-dinari{background:radial-gradient(circle at 50% 30%,#8b7358,#302820 75%)}.bust-dinari .bust-head{height:78px;border-radius:50% 50% 40% 40%;background:linear-gradient(90deg,#a77d5a,#e1b98a 48%,#976b4a)}.bust-dinari .bust-cloak{background:linear-gradient(90deg,#3e302c,#8c594b,#3b2c27)}.bust-kvirike{background:radial-gradient(circle at 50% 30%,#697a69,#1c2a22 75%)}.bust-kvirike .bust-cloak{background:linear-gradient(90deg,#293e3b,#6b8976,#293e3b)}
+.portrait-era{display:block;font:10px var(--mono);color:#6c765f;margin:18px 0 7px}.ruler-portrait h3{font-size:19px;margin:0 0 8px}.ruler-portrait p{font-size:13px;line-height:1.7;color:#596151;margin:0 0 14px}.ruler-portrait small{display:block;padding-top:12px;border-top:1px solid #d3cebd;font-size:10px;line-height:1.5;color:#777b6c}
+.monument-card{position:relative;transition:transform .45s,border-color .3s,background .3s}.monument-card.is-expanded{background:#e4e2d4;border-color:#8c9c6e;transform:translateY(-3px)}
+.monument-expand{display:inline-flex;align-items:center;gap:9px;border:0;border-bottom:1px solid #9ba58a;background:transparent;padding:10px 0 6px;margin-top:12px;color:#354632;font:11px var(--mono);cursor:pointer}
+.monument-expand span{display:inline-grid;place-items:center;width:22px;height:22px;border:1px solid #a8b196;border-radius:50%;transition:transform .3s}.monument-card.is-expanded .monument-expand span{transform:rotate(45deg)}
+.monument-extra{max-height:0;overflow:hidden;opacity:0;transform:translateY(8px);transition:max-height .55s ease,opacity .35s ease,transform .35s ease}.monument-card.is-expanded .monument-extra{max-height:220px;opacity:1;transform:translateY(0)}
+.monument-extra p{font-size:13px;line-height:1.8;color:#515c4b;padding-top:12px;border-top:1px solid #c9cdbb}
+@media(max-width:1000px){.journey-track{grid-template-columns:1fr 1fr;gap:22px}.journey-connector{display:none}.ruler-portraits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.journey-intro,.campaign-heading{display:block}.journey-intro>span{display:block;margin-top:16px}.journey-track{grid-template-columns:1fr 1fr;gap:12px}.journey-art{height:145px}.journey-stop p{font-size:12px}.campaign-commanders{grid-template-columns:1fr}.campaign-vs{padding:0}.campaign-map svg{min-width:600px}.campaign-map{overflow:auto}.ruler-portraits{gap:10px}.ruler-bust{height:160px}.bust-head{transform:scale(.82);transform-origin:top center}.bust-cloak{transform:scale(.8);transform-origin:top center}.ruler-portrait{padding:8px 8px 14px}.ruler-portrait h3{font-size:16px}.ruler-portrait p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.journey-pin{animation:none}.journey-stop,.ruler-portrait,.monument-card,.monument-expand span,.monument-extra{transition:none}}
