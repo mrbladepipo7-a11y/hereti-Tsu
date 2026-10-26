@@ -149,6 +149,12 @@
       gsap.fromTo('.hero-art .ridge',
         { y: 90, autoAlpha: 0 },
         { y: 0, autoAlpha: 1, duration: 1.5, stagger: .13, ease: 'power4.out', delay: .35 });
+
+    // Extra cinematic polish: soft floating of orbit rings
+    gsap.to('.orbit-one', { rotation: 360, duration: 90, repeat: -1, ease: 'none' });
+    gsap.to('.orbit-two', { rotation: -360, duration: 140, repeat: -1, ease: 'none' });
+    gsap.to('.sun-disc', { scale: 1.04, duration: 3.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
     }
 
     // Large landscape moves against the page scroll for a cinematic depth effect.
@@ -233,8 +239,6 @@
     }, { rootMargin: '-35% 0px -55% 0px' });
     sections.forEach(section => navObserver.observe(section));
   }
-})();
-
   // Floating animated Hereti mini-map: collapse/expand control.
   const floatingMap = $('#floatingMap');
   const mapToggle = $('#mapToggle');
@@ -260,3 +264,5 @@
       if (target) sectionObserver.observe(target);
     });
   }
+
+})();
