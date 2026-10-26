@@ -91,9 +91,9 @@
   $$('[data-close-modal]').forEach(el => el.addEventListener('click', closeModal));
 
   // Schematic map points respond to click and keyboard focus
-  $$('.map-point').forEach(point => {
+  $$$('.map-point').forEach(point => {
     point.addEventListener('click', () => {
-      $$('.map-point').forEach(other => other.classList.remove('active'));
+      $$$('.map-point').forEach(other => other.classList.remove('active'));
       point.classList.add('active');
     });
     point.addEventListener('keydown', event => {
@@ -267,7 +267,7 @@
 
 
   // Schematic map point descriptions: the map is an orientation graphic, not a georeferenced map.
-  $('.map-point').forEach(point => {
+  $$('.map-point').forEach(point => {
     const label = point.getAttribute('aria-label') || point.querySelector('text')?.textContent?.trim() || 'ისტორიული ადგილი';
     point.setAttribute('title', label + ' — საორიენტაციო მონიშვნა; არა ზუსტი კოორდინატი');
     point.setAttribute('aria-description', 'სქემატური რუკის საორიენტაციო წერტილი');
