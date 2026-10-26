@@ -382,3 +382,28 @@ main{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
 @media(min-width:1100px){body{padding:clamp(12px,2vw,30px)}.hero{min-height:410px}.geography{grid-column:span 7}.journey-section{grid-column:1/-1}}
 @media(max-width:1000px){.desktop-nav{display:none}.topbar{justify-content:space-between}.journey-track{grid-template-columns:repeat(2,minmax(0,1fr))}.journey-connector{display:none}.geography,#origins,#terms,#arab-era,#kingdom,#faith,#heritage,#unification,#historical-maps,#monuments,#saingilo,#sources,#campaign-map{grid-column:1/-1}.hero{grid-template-columns:1fr;min-height:430px}.hero-art{left:20%;opacity:.65}.hero-copy{max-width:620px}}
 @media(max-width:620px){body{padding:8px}.topbar{top:5px;min-height:62px;padding:8px 12px;border-radius:13px;margin-bottom:8px}.brand-name{font-size:17px}.hero{min-height:520px;padding:22px 18px;border-radius:15px}.hero-art{inset:15% -18% 0 0;opacity:.48}.hero:before{background:linear-gradient(180deg,#15161ad9 0%,#17181a88 50%,#17181ae8 100%)!important}.hero-title{font-size:58px}.hero-intro{font-size:13px}.hero-bottom{padding:10px 15px}.intro-strip{grid-template-columns:1fr;gap:12px;padding:20px!important}.intro-strip-copy{grid-template-columns:1fr;gap:10px}.section,.section-pad,.cinematic-section{padding:19px!important;border-radius:14px}.section-heading{display:block}.heading-main{margin-top:15px}.journey-intro{display:block}.journey-intro span{display:block;margin-top:12px;white-space:normal}.journey-track{grid-template-columns:1fr 1fr;gap:8px}.journey-art{min-height:120px}.earth-model-wrap{min-height:170px}.atlas-layout{grid-template-columns:1fr}.atlas-timeline{grid-template-columns:1fr 1fr}.atlas-era{padding:11px}.atlas-era b{font-size:12px}.atlas-era small{font-size:10px}}
+
+
+/* Final section and page-bottom layout fixes */
+main>.closing{grid-column:1/-1;width:100%;min-width:0;box-sizing:border-box;margin:0;align-self:stretch;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:linear-gradient(145deg,#17181c,#222329)!important;color:#f5f0e7!important;padding:clamp(65px,8vw,115px) clamp(20px,4vw,60px) 24px;min-height:0}
+main>.closing .closing-orbit{pointer-events:none;max-width:680px;max-height:680px;opacity:.55}
+main>.closing h2{max-width:100%;overflow-wrap:anywhere;font-size:clamp(42px,7vw,100px);line-height:1.05;margin:28px auto 32px}
+main>.closing .closing-bottom{width:100%;box-sizing:border-box;margin-top:64px;flex-wrap:wrap;align-items:center}
+main>.closing .button{display:inline-flex;max-width:100%;box-sizing:border-box}
+body>footer.footer{width:100%;box-sizing:border-box;margin:12px 0 0;min-width:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:20px clamp(16px,2.5vw,32px);border-radius:16px;overflow:hidden}
+body>footer.footer .brand{min-width:0;max-width:100%}
+body>footer.footer>span{min-width:0;overflow-wrap:anywhere}
+.floating-map{z-index:30;max-width:calc(100vw - 24px)}
+.side-index{z-index:25}
+@media(min-width:1001px){main>.closing{grid-column:1/-1}}
+@media(max-width:1000px){main>.closing{grid-column:1/-1}}
+@media(max-width:650px){
+ body{padding-bottom:10px}
+ main>.closing{padding:58px 18px 20px;border-radius:14px}
+ main>.closing h2{font-size:clamp(40px,11vw,64px);line-height:1.08;margin:24px auto 28px}
+ main>.closing .closing-bottom{margin-top:44px;gap:10px;flex-direction:column;align-items:flex-start;text-align:left}
+ body>footer.footer{padding:16px;gap:12px;border-radius:13px}
+ body>footer.footer .brand{flex:1 1 100%}
+ body>footer.footer>span{font-size:8px}
+ .floating-map{right:8px;bottom:8px}
+}
