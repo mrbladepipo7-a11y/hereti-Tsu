@@ -262,3 +262,20 @@ body{cursor:default}
 .ruler-portrait:hover .portrait-halo{box-shadow:0 0 0 12px #e2ce8d12,0 0 35px #d9c58a40}
 @media(max-width:620px){.earth-model-wrap,.journey-stop:first-child .journey-art{min-height:280px}.hereti-globe{min-height:280px}.globe-controls button{font-size:8px;padding:6px 7px}.globe-model-note{display:block}.globe-model-note span{display:block;margin-bottom:7px}.portrait-halo{width:112px;height:112px}.ruler-bust{height:170px}.bust-cloak{top:142px}}
 @media(prefers-reduced-motion:reduce){.globe-controls button,.ruler-portrait:hover{transition:none}}
+
+/* FINAL POLISH — textured globe and illustrated royal portraits */
+.hereti-globe-webgl{position:absolute!important;inset:0;width:100%;height:100%;min-height:320px;z-index:1;display:block}
+.earth-model-wrap{position:relative;isolation:isolate;min-height:340px}
+.earth-model-wrap:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 42%,rgba(4,13,17,.28) 100%)}
+.globe-overlay{z-index:3}
+.globe-controls{z-index:4}
+.ruler-bust{position:relative;overflow:hidden;min-height:270px;height:270px;background:#263b31}
+.ruler-bust>.ruler-illustration{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:5;object-fit:cover;filter:saturate(.92) contrast(1.04);transition:transform .65s cubic-bezier(.2,.75,.2,1),filter .65s ease}
+.ruler-portrait:hover .ruler-illustration{transform:scale(1.045);filter:saturate(1.08) contrast(1.07)}
+.ruler-bust>.portrait-halo,.ruler-bust>.portrait-crown,.ruler-bust>.portrait-hair,.ruler-bust>.bust-head,.ruler-bust>.portrait-neck,.ruler-bust>.bust-cloak,.ruler-bust>.portrait-embroider,.ruler-bust>.bust-mark{display:none}
+.ruler-portrait{overflow:hidden;border:1px solid rgba(129,110,68,.35);background:linear-gradient(180deg,#f2ead8,#e7dcc4);box-shadow:0 10px 30px rgba(41,35,24,.07);transition:transform .4s ease,box-shadow .4s ease}
+.ruler-portrait:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(41,35,24,.14)}
+.ruler-portrait h3{font-family:var(--serif);letter-spacing:-.02em}
+.ruler-portrait small{display:block;margin:0 16px 18px;color:#85775f;font-size:10px;line-height:1.6}
+@media(max-width:620px){.ruler-bust{height:250px;min-height:250px}.hereti-globe-webgl{min-height:280px}}
+@media(prefers-reduced-motion:reduce){.ruler-bust>.ruler-illustration,.ruler-portrait{transition:none}}
