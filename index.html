@@ -1,352 +1,60 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ka">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101611">
-  <meta name="description" content="ჰერეთი — ისტორია, მეფეები, რუკები და ქართული კულტურული მემკვიდრეობა.">
-  <title>ჰერეთი — ისტორია, რომელიც გრძელდება</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;500;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101712"><meta name="description" content="ჰერეთისა და საინგილოს ისტორიული მეხსიერება — ქრონოლოგია, რუკები და კულტურული მემკვიდრეობა.">
+  <title>ჰერეთი — ისტორიის ცოცხალი რუკა</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"><script src="script.js" defer></script>
 </head>
-
 <body>
-  <div class="grain"></div>
-  <div class="reading-progress" id="readingProgress"></div>
-
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="ჰერეთი — მთავარი">
-      <span class="brand-symbol">ჰ</span>
-      <span class="brand-copy">
-        <strong>ჰერეთი</strong>
-        <small>ისტორიული მემკვიდრეობა</small>
-      </span>
-    </a>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="მენიუს გახსნა" aria-expanded="false">
-      <span></span><span></span>
-    </button>
-
-    <nav class="top-nav" id="topNav">
-      <a href="#history">ისტორია</a>
-      <a href="#kings">მეფეები</a>
-      <a href="#map">რუკა</a>
-      <a href="#heritage">ძეგლები</a>
-      <a href="#century">XX საუკუნე</a>
-    </nav>
-
-    <a class="top-cta" href="#explore">აღმოაჩინე <span>↗</span></a>
+  <div class="grain" aria-hidden="true"></div><div class="scroll-progress" id="scrollProgress"></div>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="ჰერეთი — მთავარი"><span class="brand-mark">ჰ</span><span><b>ჰერეთი</b><small>ისტორიის ცოცხალი რუკა</small></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="მენიუს გახსნა"><span></span><span></span></button>
+    <nav id="mainNav" class="main-nav" aria-label="მთავარი ნავიგაცია"><a href="#story">ისტორია</a><a href="#timeline">ქრონოლოგია</a><a href="#maps">რუკები</a><a href="#warriors">მეომრის სახე</a><a href="#heritage">მემკვიდრეობა</a></nav>
+    <a class="header-cta" href="#sources">წყაროები <span>↗</span></a>
   </header>
-
-  <aside class="side-rail" aria-label="გვერდის ნავიგაცია">
-    <span class="rail-label">ნავიგაცია</span>
-    <a href="#home" class="rail-link active" aria-label="მთავარი"><span>01</span></a>
-    <a href="#history" class="rail-link" aria-label="ისტორია"><span>02</span></a>
-    <a href="#map" class="rail-link" aria-label="რუკა"><span>03</span></a>
-    <a href="#kings" class="rail-link" aria-label="მეფეები"><span>04</span></a>
-    <a href="#heritage" class="rail-link" aria-label="ძეგლები"><span>05</span></a>
-    <div class="rail-line"></div>
-  </aside>
-
   <main>
-    <section class="hero" id="home">
-      <div class="hero-image"></div>
-      <div class="hero-shade"></div>
-      <div class="hero-grid"></div>
-
-      <div class="hero-content reveal">
-        <p class="eyebrow"><span class="status-dot"></span> აღმოსავლეთ საქართველოს ისტორია</p>
-        <h1>ჰერეთი<span class="title-period">.</span></h1>
-        <p class="hero-subtitle">მიწა, სადაც ისტორიამ<br>საუკუნეებს გაუძლო.</p>
-        <p class="hero-description">
-          სამეფოები, მეფეები, უძველესი ტაძრები და საზღვრები,
-          რომლებმაც აღმოსავლეთ საქართველოს ისტორია შექმნეს.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#history">ისტორიის აღმოჩენა <span>↗</span></a>
-          <a class="button button-quiet" href="#map"><span class="play-mark">▶</span> რუკის ნახვა</a>
-        </div>
+    <section class="hero section-shell" aria-labelledby="hero-title">
+      <div class="hero-copy reveal"><div class="eyebrow"><span class="eyebrow-line"></span> საქართველოს ისტორიულ-გეოგრაფიული მეხსიერება</div>
+        <h1 id="hero-title">ჰერეთი<span class="title-period">.</span><br><em>საზღვრებს მიღმა</em><br>მეხსიერება</h1>
+        <p class="hero-lead">მხარე, რომლის ისტორია პოლიტიკურ საზღვრებზე ფართოა — კახეთთან კავშირით, საინგილოს მრავალფეროვნებითა და ქართული კულტურის კვალით.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#story">ისტორიაში შესვლა <span>↓</span></a><a class="text-link" href="#maps">რუკების დათვალიერება <span>↗</span></a></div>
+        <div class="hero-facts"><div><strong>1918–1921</strong><span>გარდამტეხი წლები</span></div><div><strong>07.05.1920</strong><span>ზაქათალის საკითხი</span></div><div><strong>1921</strong><span>საზღვრების ცვლილება</span></div></div>
       </div>
-
-      <div class="hero-index">
-        <span>ისტორიული ატლასი</span>
-        <strong>01 / 05</strong>
-      </div>
-
-      <div class="hero-bottom">
-        <span>CAUCASUS · GEORGIA</span>
-        <a href="#history">ჩამოსქროლე <span class="scroll-arrow">↓</span></a>
-      </div>
-
-      <button class="mini-map" id="miniMapButton" aria-label="მინი რუკის გახსნა">
-        <span class="mini-map-head"><span>HERETI / MAP</span><span class="map-pulse"></span></span>
-        <svg viewBox="0 0 210 130" role="img" aria-label="ჰერეთის სქემატური რუკა">
-          <defs>
-            <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#d8c18a" stop-opacity=".8"/>
-              <stop offset="1" stop-color="#7d875a" stop-opacity=".25"/>
-            </linearGradient>
-          </defs>
-          <path class="map-territory" d="M37 32 L66 19 L91 28 L119 15 L147 34 L172 41 L163 64 L177 81 L151 94 L137 116 L111 102 L89 112 L69 91 L44 85 L29 61 Z" fill="url(#mapFill)"/>
-          <path class="map-border" d="M37 32 L66 19 L91 28 L119 15 L147 34 L172 41 L163 64 L177 81 L151 94 L137 116 L111 102 L89 112 L69 91 L44 85 L29 61 Z"/>
-          <path class="map-river" d="M25 45 Q55 64 73 51 T113 61 T153 52 T190 71"/>
-          <circle class="map-point" cx="110" cy="58" r="4"/>
-          <text x="118" y="53">ჰერეთი</text>
-          <text x="22" y="119" class="map-caption">სქემატური გამოსახულება</text>
-        </svg>
-        <span class="mini-map-footer">გახსენით რუკის სექცია ↗</span>
-      </button>
+      <div class="hero-art reveal" aria-label="დეკორატიული, სქემატური რუკის ილუსტრაცია"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-grid"></div><svg class="hero-map" viewBox="0 0 520 590" role="img" aria-label="ჰერეთის სქემატური ფორმა, არა ზუსტი ისტორიული საზღვარი"><defs><linearGradient id="landGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9c18b"/><stop offset="1" stop-color="#8e7545"/></linearGradient><filter id="mapGlow"><feGaussianBlur stdDeviation="7"/></filter></defs><path class="map-glow" d="M154 66 L234 91 268 126 333 134 367 183 420 204 398 251 424 290 376 326 359 383 315 407 294 463 245 477 219 434 170 416 147 366 105 342 119 296 86 255 111 210 95 161Z"/><path class="land-shape" d="M154 66 L234 91 268 126 333 134 367 183 420 204 398 251 424 290 376 326 359 383 315 407 294 463 245 477 219 434 170 416 147 366 105 342 119 296 86 255 111 210 95 161Z"/><path class="map-contour" d="M143 115 L229 131 260 160 326 164 367 211 391 238 367 274 390 296 347 344 333 386 288 425 267 446 235 412 185 393 164 354 129 325 141 291 111 252 136 215 119 173Z"/><path class="map-route" d="M125 280 Q190 220 238 262 T341 240 T390 294"/><g class="map-point"><circle cx="238" cy="262" r="5"/><circle cx="341" cy="240" r="5"/><circle cx="190" cy="360" r="5"/></g><g class="map-label"><text x="252" y="251">კახეთი</text><text x="353" y="229">ზაქათალა</text><text x="202" y="379">ბელაქანი</text></g><text class="map-north" x="440" y="83">N ↑</text></svg><div class="art-caption"><span class="caption-dot"></span><span>კავკასიის აღმოსავლეთი მხარე</span><span class="caption-note">სქემატური ილუსტრაცია</span></div><div class="hero-stamp">H<br><small>HISTORY / GEO</small></div></div>
+      <div class="hero-bottom-note"><span>01 / 05</span><span>ისტორიული მეხსიერება · კულტურა · გეოგრაფია</span><span>ჩამოსქროლე ↓</span></div>
     </section>
 
-    <section class="intro-section section-pad" id="explore">
-      <div class="section-kicker reveal"><span>01</span><span class="kicker-line"></span><span>რეგიონის გაცნობა</span></div>
-      <div class="intro-layout">
-        <div class="intro-title reveal">
-          <p class="overline">ისტორია გეოგრაფიის მიღმა</p>
-          <h2>ერთი მხარე.<br><em>მრავალი ეპოქა.</em></h2>
-        </div>
-        <div class="intro-copy reveal">
-          <p class="lead">
-            ჰერეთი აღმოსავლეთ საქართველოს ისტორიულ-გეოგრაფიული მხარეა,
-            რომლის წარსულიც კახეთის პოლიტიკურ, კულტურულ და რელიგიურ
-            ისტორიასთან მჭიდროდ არის დაკავშირებული.
-          </p>
-          <p>
-            საუკუნეების განმავლობაში ამ მხარეში იცვლებოდა პოლიტიკური
-            საზღვრები, მმართველები და ძალთა თანაფარდობა. ისტორიული
-            მემკვიდრეობა კი შემორჩა წერილობით წყაროებში, არქიტექტურასა
-            და ადგილობრივ ტრადიციებში.
-          </p>
-          <a class="text-link" href="#history">გაეცანი ისტორიას <span>↗</span></a>
-        </div>
-      </div>
-      <div class="stat-row reveal">
-        <div class="stat"><strong>XI–XII</strong><span>გაერთიანების გარდამტეხი ეპოქა</span></div>
-        <div class="stat"><strong>1104</strong><span>კახეთ-ჰერეთის შემოერთების ტრადიციული თარიღი</span></div>
-        <div class="stat"><strong>∞</strong><span>კულტურული მემკვიდრეობა</span></div>
-      </div>
+    <section class="intro-section section-shell" id="story"><div class="section-kicker reveal">01 — კონტექსტი</div><div class="intro-grid"><h2 class="section-title reveal">ერთი მხარე.<br><em>მრავალი ფენა.</em></h2><div class="intro-body reveal"><p class="large-copy">ჰერეთი საქართველოს ისტორიის მნიშვნელოვანი ისტორიულ-გეოგრაფიული მხარეა, რომელიც საუკუნეების განმავლობაში მჭიდროდ იყო დაკავშირებული კახეთთან და საქართველოს პოლიტიკურ, კულტურულ და რელიგიურ ცხოვრებასთან.</p><p>ამ თემის განხილვისას მნიშვნელოვანია განვასხვავოთ ისტორიული ჰერეთი და საინგილო — სახელწოდება, რომელიც ძირითადად დღევანდელი აზერბაიჯანის ჩრდილო-დასავლეთში მდებარე, ქართული ისტორიული მემკვიდრეობით გამორჩეული მხარის აღსანიშნავად გამოიყენება.</p><p>ქვემოთ მოცემული ქრონოლოგია და რუკები ეფუძნება მოწოდებულ ტექსტს. რადგან ამ ტექსტში შუა საუკუნეების მეფეთა სახელები და კონკრეტული ბრძოლები მითითებული არ არის, ისინი ფაქტებად არ არის გამოგონილი.</p></div></div></section>
+
+    <section class="timeline-section section-shell" id="timeline"><div class="section-heading reveal"><div><div class="section-kicker">02 — დროის ხაზი</div><h2 class="section-title">გარდატეხის <em>ქრონიკა</em></h2></div><p>მოწოდებული წყაროს მიხედვით — ზუსტად დადასტურებული თარიღები და მოვლენები.</p></div>
+      <div class="timeline-controls reveal"><span class="control-label">ფილტრი</span><button class="filter-button active" data-filter="all">ყველა მოვლენა</button><button class="filter-button" data-filter="politics">პოლიტიკა</button><button class="filter-button" data-filter="culture">კულტურა</button><button class="filter-button" data-filter="identity">იდენტობა</button></div>
+      <div class="timeline" id="timelineList" aria-live="polite"></div>
+      <aside class="source-note reveal"><span class="note-icon">i</span><div><strong>მეფეთა ქრონოლოგიის შესახებ</strong><p>მოწოდებულ ტექსტში ჰერეთის მეფეთა სახელები, მეფობის წლები და შუა საუკუნეების სამხედრო კამპანიები არ არის ჩამოთვლილი. ამიტომ საიტში ეს მონაცემები არ არის გამოგონილი. ქვემოთ მოცემული დროის ხაზი ასახავს მხოლოდ წყაროში აღწერილ მოვლენებს.</p></div></aside>
     </section>
 
-    <section class="history-section section-pad" id="history">
-      <div class="section-kicker reveal"><span>02</span><span class="kicker-line"></span><span>ისტორიული მიმოხილვა</span></div>
-      <div class="section-heading reveal">
-        <p class="overline">წარსულის ფენები</p>
-        <h2>ჰერეთი და კახეთი</h2>
-        <p>ორი ისტორიული სივრცე, რომელთა ურთიერთობამ აღმოსავლეთ საქართველოს პოლიტიკური სურათი ჩამოაყალიბა.</p>
-      </div>
-
-      <div class="history-grid">
-        <article class="history-card history-card-large reveal">
-          <span class="card-number">01 / ORIGINS</span>
-          <div class="card-content">
-            <p class="overline">ისტორიული გეოგრაფია</p>
-            <h3>ჰერეთი</h3>
-            <p>ჰერეთის საზღვრები სხვადასხვა ეპოქაში იცვლებოდა. მისი მდებარეობა განაპირობებდა კავშირებს მეზობელ პოლიტიკურ ერთეულებთან, სავაჭრო გზებთან და კულტურულ სივრცეებთან.</p>
-          </div>
-        </article>
-
-        <article class="history-card history-card-kakheti reveal">
-          <span class="card-number">02 / POWER</span>
-          <div class="card-content">
-            <p class="overline">პოლიტიკური განვითარება</p>
-            <h3>კახეთი</h3>
-            <p>VIII–IX საუკუნეებიდან კახეთის პოლიტიკური ორგანიზაცია ძლიერდებოდა. მისი მმართველები ურთიერთობდნენ მეზობელ ქართულ სამთავროებსა და კავკასიის სხვა პოლიტიკურ ძალებთან.</p>
-          </div>
-        </article>
-
-        <article class="history-card history-card-union reveal">
-          <span class="card-number">03 / UNION</span>
-          <div class="card-content">
-            <p class="overline">პოლიტიკური გარდატეხა</p>
-            <h3>კახეთ-ჰერეთი</h3>
-            <p>კახეთისა და ჰერეთის პოლიტიკური და კულტურული ურთიერთობები ხანგრძლივი პროცესის ნაწილი იყო. 1104 წლის მოვლენებმა მნიშვნელოვანი როლი ითამაშა ერთიანი საქართველოს ჩამოყალიბებაში.</p>
-          </div>
-        </article>
-      </div>
+    <section class="maps-section section-shell" id="maps"><div class="section-heading reveal"><div><div class="section-kicker">03 — სივრცე და ცვლილება</div><h2 class="section-title">მხარე <em>რუკაზე</em></h2></div><p>ინტერაქტიული სქემები გეოგრაფიული კავშირებისა და პოლიტიკური გარდატეხების გასააზრებლად. ისინი არ წარმოადგენს ზუსტ ისტორიულ საზღვრებს.</p></div>
+      <div class="map-tabs reveal" role="tablist" aria-label="რუკის რეჟიმები"><button class="map-tab active" role="tab" aria-selected="true" data-map="region">01 / მხარე</button><button class="map-tab" role="tab" aria-selected="false" data-map="1920">02 / 1920</button><button class="map-tab" role="tab" aria-selected="false" data-map="1921">03 / 1921</button></div>
+      <div class="map-panel reveal"><div class="interactive-map-wrap"><svg id="interactiveMap" class="interactive-map" viewBox="0 0 800 480" role="img" aria-label="ინტერაქტიული სქემატური რუკა"><defs><pattern id="mapLines" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#a3a98b" stroke-opacity=".13" stroke-width=".7"/></pattern><linearGradient id="mapTerrain" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#303c2f"/><stop offset="1" stop-color="#1c2a22"/></linearGradient></defs><rect width="800" height="480" fill="url(#mapTerrain)"/><rect width="800" height="480" fill="url(#mapLines)"/><path class="river" d="M-10 340 C120 260 175 370 286 288 S450 220 540 260 690 190 820 225"/><path class="ridge" d="M-20 150 L65 105 126 132 198 74 270 116 336 68 406 112 474 61 551 109 616 72 689 124 820 82"/><path class="region-fill" d="M196 128 L288 110 349 139 420 122 479 170 538 186 553 235 519 281 474 307 454 358 386 374 338 341 281 336 248 296 199 278 173 228Z"/><path class="region-border" d="M196 128 L288 110 349 139 420 122 479 170 538 186 553 235 519 281 474 307 454 358 386 374 338 341 281 336 248 296 199 278 173 228Z"/><path class="boundary-dash" d="M349 139 Q392 206 386 374"/><path class="route-line" d="M220 252 Q300 196 366 239 T485 223"/><g class="map-city" tabindex="0" role="button" data-place="kakheti" aria-label="კახეთი"><circle cx="366" cy="239" r="7"/><text x="380" y="234">კახეთი</text></g><g class="map-city" tabindex="0" role="button" data-place="zagatala" aria-label="ზაქათალა"><circle cx="485" cy="223" r="7"/><text x="499" y="218">ზაქათალა</text></g><g class="map-city" tabindex="0" role="button" data-place="belokani" aria-label="ბელაქანი"><circle cx="338" cy="341" r="7"/><text x="352" y="359">ბელაქანი</text></g><g class="map-city" tabindex="0" role="button" data-place="kakh" aria-label="კახი"><circle cx="465" cy="283" r="7"/><text x="479" y="278">კახი</text></g><text x="34" y="42" class="map-label-small">CAUCASUS / EAST</text><text x="34" y="448" class="map-label-small">სქემატური რუკა · არა კადასტრული საზღვარი</text><g class="map-compass" transform="translate(734 70)"><circle r="25"/><path d="M0 -17 L7 6 L0 2 L-7 6Z"/><text x="-4" y="-33">N</text></g></svg><div class="map-overlay-label" id="mapOverlayLabel">ისტორიული კავშირები</div></div><div class="map-details"><span class="section-kicker" id="mapNumber">MAP 01</span><h3 id="mapTitle">ჰერეთი და მიმდებარე მხარეები</h3><p id="mapDescription">საინგილო, რომელიც კახის, ზაქათალისა და ბელაქნის მიდამოებს მოიცავს, ისტორიულად უკავშირდება ჰერეთის ჩრდილო-აღმოსავლეთ ნაწილს. რუკა ამ კავშირების სქემატური ილუსტრაციაა.</p><div class="map-legend"><span><i class="legend-region"></i> სქემატური არეალი</span><span><i class="legend-line"></i> კავშირის ხაზი</span><span><i class="legend-dot"></i> დასახლებული პუნქტი</span></div><div class="place-info" id="placeInfo"><strong>აირჩიე რუკაზე მონიშნული ადგილი</strong><span>მოკლე განმარტება აქ გამოჩნდება.</span></div></div></div>
+      <div class="map-disclaimer">შენიშვნა: რუკის ფორმები და ხაზები საგანმანათლებლო/ვიზუალური სქემებია და არ უნდა იქნეს გამოყენებული ზუსტი ისტორიული საზღვრების მტკიცებულებად. წყაროში კონკრეტული ბრძოლის ადგილები არ არის დასახელებული.</div>
     </section>
 
-    <section class="map-section section-pad" id="map">
-      <div class="section-kicker reveal"><span>03</span><span class="kicker-line"></span><span>გეოგრაფიული ატლასი</span></div>
-      <div class="map-layout">
-        <div class="map-copy reveal">
-          <p class="overline">ტერიტორია და მეხსიერება</p>
-          <h2>ჰერეთი<br><em>რუკაზე</em></h2>
-          <p>ისტორიული რეგიონების საზღვრები ყოველთვის ზუსტად არ ემთხვევა თანამედროვე ადმინისტრაციულ ხაზებს. ამიტომ რუკა უნდა განვიხილოთ კონკრეტული ეპოქის კონტექსტში.</p>
-          <div class="map-legend">
-            <span><i class="legend-dot legend-gold"></i> ისტორიული არეალი — სქემატურად</span>
-            <span><i class="legend-dot legend-blue"></i> მდინარის ხაზის დეკორატიული მონიშვნა</span>
-          </div>
-          <p class="map-disclaimer">ეს არის დიზაინისთვის შექმნილი სქემატური ილუსტრაცია და არა ზუსტი ისტორიული ან თანამედროვე საზღვრების რუკა.</p>
-        </div>
-
-        <div class="map-stage reveal">
-          <div class="map-stage-top"><span>HISTORICAL ATLAS</span><span>01 — HERETI</span></div>
-          <svg class="large-map" viewBox="0 0 600 470" role="img" aria-label="ჰერეთის სქემატური რუკის ანიმაცია">
-            <defs>
-              <pattern id="mapGrid" width="28" height="28" patternUnits="userSpaceOnUse">
-                <path d="M28 0H0V28" fill="none" stroke="#d8c18a" stroke-opacity=".12" stroke-width="1"/>
-              </pattern>
-              <linearGradient id="landGradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#b9a16b" stop-opacity=".72"/>
-                <stop offset="1" stop-color="#627557" stop-opacity=".36"/>
-              </linearGradient>
-            </defs>
-            <rect width="600" height="470" fill="url(#mapGrid)"/>
-            <path class="large-territory" d="M105 112 L165 75 L225 92 L270 54 L337 80 L391 105 L449 113 L469 168 L445 210 L475 257 L426 293 L397 357 L339 338 L292 374 L241 339 L192 348 L161 301 L112 277 L86 220 L101 171 Z" fill="url(#landGradient)"/>
-            <path class="large-border" d="M105 112 L165 75 L225 92 L270 54 L337 80 L391 105 L449 113 L469 168 L445 210 L475 257 L426 293 L397 357 L339 338 L292 374 L241 339 L192 348 L161 301 L112 277 L86 220 L101 171 Z"/>
-            <path class="river-line" d="M48 167 C120 180 143 229 202 208 S292 169 334 222 S420 229 534 271"/>
-            <path class="river-line river-line-secondary" d="M175 47 C204 113 245 132 255 177 S292 260 360 296"/>
-            <circle class="atlas-marker" cx="290" cy="208" r="8"/>
-            <circle class="atlas-pulse" cx="290" cy="208" r="18"/>
-            <text class="map-label" x="307" y="202">ჰერეთი</text>
-            <text class="map-small-label" x="312" y="222">ისტორიული არეალი</text>
-            <text class="map-coordinate" x="18" y="445">ILLUSTRATIVE MAP / NOT TO SCALE</text>
-            <path class="compass" d="M535 45 L548 80 L535 73 L522 80 Z"/>
-            <text x="531" y="33" class="compass-letter">N</text>
-          </svg>
-          <div class="map-stage-bottom"><span>გეოგრაფია · ისტორია · მემკვიდრეობა</span><span>↗</span></div>
-        </div>
-      </div>
+    <section class="warriors-section section-shell" id="warriors"><div class="section-heading reveal"><div><div class="section-kicker">04 — ვიზუალური ინტერპრეტაცია</div><h2 class="section-title">მეომრის <em>სილუეტი</em></h2></div><p>სტილიზებული CSS-ილუსტრაციები ისტორიულ გარემოზე ფიქრისთვის — არა კონკრეტული ჰერელი მეომრის დოკუმენტური რეკონსტრუქცია.</p></div>
+      <div class="warrior-grid"><article class="warrior-card reveal"><div class="warrior-scene scene-one"><div class="scene-moon"></div><div class="scene-mountain"></div><div class="warrior figure-scout"><div class="shield"></div><div class="helmet"></div><div class="head"></div><div class="torso"></div><div class="cape"></div><div class="arm arm-left"></div><div class="arm arm-right"></div><div class="sword"></div><div class="leg leg-left"></div><div class="leg leg-right"></div></div><div class="scene-ground"></div><span class="scene-label">FIG. 01 / WATCH</span></div><div class="warrior-card-copy"><span class="card-index">01 — მეთვალყურე</span><h3>მთის სიჩუმე</h3><p>მოძრავი მოსასვენებელი სილუეტი, ფარისა და მახვილის სიმბოლური ფორმებით.</p><button class="motion-button" data-motion="march" aria-pressed="false">მოძრაობის ჩვენება <span>↗</span></button></div></article>
+      <article class="warrior-card reveal"><div class="warrior-scene scene-two"><div class="scene-moon moon-two"></div><div class="scene-mountain mountain-two"></div><div class="warrior figure-guard"><div class="shield shield-two"></div><div class="helmet helmet-two"></div><div class="head"></div><div class="torso torso-two"></div><div class="cape cape-two"></div><div class="arm arm-left"></div><div class="arm arm-right"></div><div class="sword sword-two"></div><div class="leg leg-left"></div><div class="leg leg-right"></div></div><div class="scene-ground"></div><span class="scene-label">FIG. 02 / GUARD</span></div><div class="warrior-card-copy"><span class="card-index">02 — მცველი</span><h3>კარიბჭის დარაჯი</h3><p>დაცვითი პოზა და ფარის ნელი მოძრაობა — დეკორატიული CSS ანიმაცია.</p><button class="motion-button" data-motion="guard" aria-pressed="false">მოძრაობის ჩვენება <span>↗</span></button></div></article>
+      <article class="warrior-card reveal"><div class="warrior-scene scene-three"><div class="scene-moon moon-three"></div><div class="scene-mountain mountain-three"></div><div class="warrior figure-rider"><div class="shield shield-three"></div><div class="helmet helmet-three"></div><div class="head"></div><div class="torso torso-three"></div><div class="cape cape-three"></div><div class="arm arm-left"></div><div class="arm arm-right"></div><div class="sword sword-three"></div><div class="leg leg-left"></div><div class="leg leg-right"></div></div><div class="scene-ground"></div><span class="scene-label">FIG. 03 / ADVANCE</span></div><div class="warrior-card-copy"><span class="card-index">03 — მებრძოლი</span><h3>წინსვლის ჟესტი</h3><p>ენერგიული სილუეტი, რომელიც მოძრაობის განცდას ქმნის ისტორიული ფაქტის მტკიცების გარეშე.</p><button class="motion-button" data-motion="advance" aria-pressed="false">მოძრაობის ჩვენება <span>↗</span></button></div></article></div>
+      <p class="warrior-note">ყველა მეომარი გრაფიკულად, CSS ელემენტებით არის შექმნილი. ტანსაცმელი, შეიარაღება და პოზები განზოგადებული მხატვრული მოტივებია; მოწოდებული წყარო მათ კონკრეტულ ისტორიულ პერიოდს არ უკავშირებს.</p>
     </section>
 
-    <section class="kings-section section-pad" id="kings">
-      <div class="section-kicker reveal"><span>04</span><span class="kicker-line"></span><span>მმართველთა ქრონოლოგია</span></div>
-      <div class="section-heading reveal">
-        <p class="overline">ეპოქები და მმართველები</p>
-        <h2>ისტორიის ნაკადი</h2>
-        <p>ქრონოლოგია აერთიანებს მნიშვნელოვან მმართველებსა და პოლიტიკურ მოვლენებს. ადრეული პერიოდის თარიღები ზოგჯერ წყაროების მიხედვით განსხვავდება.</p>
-      </div>
-
-      <div class="timeline">
-        <article class="timeline-item reveal">
-          <div class="timeline-year">VIII–IX სს.</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span>01 / ადრეული პოლიტიკური ერთეულები</span>
-            <h3>ჰერეთის გაძლიერება</h3>
-            <p>რეგიონში ვითარდებოდა ადგილობრივი პოლიტიკური ცენტრები და მეზობელ სამთავროებთან ურთიერთობები.</p>
-          </div>
-        </article>
-        <article class="timeline-item reveal">
-          <div class="timeline-year">X ს.</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span>02 / ჰერეთის მმართველები</span>
-            <h3>გრიგოლ ჰამამი და იშხანიკი</h3>
-            <p>ჰერეთის პოლიტიკური ისტორია უკავშირდება მმართველებს, რომლებმაც რეგიონის გავლენისა და საგარეო ურთიერთობების გაძლიერებაში მნიშვნელოვანი როლი ითამაშეს.</p>
-          </div>
-        </article>
-        <article class="timeline-item reveal">
-          <div class="timeline-year">1010–1037/39</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span>03 / კახეთ-ჰერეთის სამეფო</span>
-            <h3>კვირიკე III დიდი</h3>
-            <p>კვირიკე III-ის მმართველობის დროს კახეთ-ჰერეთის სამეფო გაძლიერდა. მმართველობის ზუსტი ქრონოლოგია წყაროების მიხედვით დასაზუსტებელია.</p>
-          </div>
-        </article>
-        <article class="timeline-item reveal">
-          <div class="timeline-year">XI ს.</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span>04 / რეგიონული ძალა</span>
-            <h3>კახეთ-ჰერეთის პოლიტიკური როლი</h3>
-            <p>სამეფო აღმოსავლეთ საქართველოს პოლიტიკურ ცხოვრებაში მნიშვნელოვან ძალად რჩებოდა, სანამ დავით IV-ის გაერთიანების პოლიტიკა გადამწყვეტ ეტაპზე გადავიდოდა.</p>
-          </div>
-        </article>
-        <article class="timeline-item reveal">
-          <div class="timeline-year">1104</div>
-          <div class="timeline-dot timeline-dot-highlight"></div>
-          <div class="timeline-card timeline-card-highlight">
-            <span>05 / გარდამტეხი მოვლენა</span>
-            <h3>კახეთ-ჰერეთის შემოერთება</h3>
-            <p>დავით IV აღმაშენებლის მმართველობისას კახეთ-ჰერეთი ერთიანი საქართველოს სამეფოს შემადგენლობაში შევიდა. ეს მოვლენა ქვეყნის პოლიტიკური გაერთიანების მნიშვნელოვანი ეტაპი გახდა.</p>
-          </div>
-        </article>
-      </div>
-      <p class="source-note">ქრონოლოგია წარმოადგენს მოკლე მიმოხილვას. საბოლოო აკადემიური ვერსიისთვის საჭიროა თითოეული თარიღისა და მმართველის შესახებ წყაროების მითითება.</p>
+    <section class="heritage-section section-shell" id="heritage"><div class="heritage-intro reveal"><div class="section-kicker">05 — კულტურული მემკვიდრეობა</div><h2 class="section-title">ქვა ინახავს<br><em>მეხსიერებას.</em></h2><p>ჰერეთისა და საინგილოს ისტორიული მნიშვნელობა მხოლოდ პოლიტიკურ მოვლენებს არ უკავშირდება. ქართული კულტურისა და ქრისტიანული არქიტექტურის ძეგლები მრავალსაუკუნოვან კავშირებზე მიუთითებს.</p></div><div class="heritage-feature reveal"><div class="heritage-visual"><div class="church-art" aria-label="ქურმუხის ტაძრის აბსტრაქტული გრაფიკული ილუსტრაცია"><div class="church-halo"></div><div class="church-hill"></div><div class="church-building"><div class="church-roof"></div><div class="church-tower"><div class="church-cross"></div><div class="church-window"></div></div><div class="church-body"><div class="church-door"></div><div class="church-window side-window"></div></div></div><div class="church-foreground"></div></div><div class="visual-caption"><span>HERITAGE / ARCHITECTURE</span><span>გრაფიკული ინტერპრეტაცია</span></div></div><div class="heritage-text"><span class="card-index">ძეგლი / 01</span><h3>ქურმუხის წმინდა გიორგის ტაძარი</h3><p>მოწოდებული ტექსტი ტაძარს ჰერეთისა და საინგილოს ქართული კულტურული მემკვიდრეობის მნიშვნელოვან ძეგლად გამოყოფს. მისი არსებობა მხარის ისტორიულ-კულტურული კავშირების ერთ-ერთ ნიშნად არის წარმოდგენილი.</p><div class="heritage-tags"><span>არქიტექტურა</span><span>კულტურული მეხსიერება</span><span>საინგილო</span></div></div></div>
+      <div class="identity-band reveal"><div class="identity-mark">ქართული<br>მეხსიერება</div><div><span class="section-kicker">ენა · ტრადიცია · იდენტობა</span><h3>საზღვარი არ შლის კულტურულ კავშირს.</h3><p>წყაროს მიხედვით, საბჭოთა პერიოდში საინგილოს ქართველ მოსახლეობაში ქართული ენა, ტრადიციები და კულტურული მემკვიდრეობის ნაწილი შენარჩუნდა. ინგილოებში არიან როგორც ქრისტიანი, ისე მუსლიმი ქართველები.</p></div></div>
     </section>
 
-    <section class="heritage-section section-pad" id="heritage">
-      <div class="section-kicker reveal"><span>05</span><span class="kicker-line"></span><span>მატერიალური მემკვიდრეობა</span></div>
-      <div class="section-heading reveal">
-        <p class="overline">ქვა, რწმენა და მეხსიერება</p>
-        <h2>კულტურული ძეგლები</h2>
-        <p>ჰერეთისა და კახეთის საეკლესიო არქიტექტურა რეგიონში ქრისტიანული კულტურის, სამშენებლო ტრადიციებისა და ისტორიული კავშირების შესწავლისთვის მნიშვნელოვანია.</p>
-      </div>
-
-      <div class="heritage-grid">
-        <article class="heritage-card reveal">
-          <div class="heritage-art art-khurmukh"><span>01</span><div class="art-silhouette">✦</div></div>
-          <div class="heritage-info"><p class="overline">კახი · საინგილო</p><h3>ქურმუხის წმინდა გიორგი</h3><p>ხეობაში მდებარე ტაძარი, რომლის ისტორია მრავალჯერადი ნგრევისა და აღდგენის ეპიზოდებს მოიცავს.</p></div>
-        </article>
-        <article class="heritage-card reveal">
-          <div class="heritage-art art-kumi"><span>02</span><div class="art-silhouette">✦</div></div>
-          <div class="heritage-info"><p class="overline">ჰერეთის ისტორიული ძეგლი</p><h3>ყუმის ღვთისმშობლის ბაზილიკა</h3><p>VI–VII საუკუნეებით დათარიღებული ბაზილიკა, რომელიც ქართული მონუმენტური არქიტექტურის კვლევისთვის მნიშვნელოვანია.</p></div>
-        </article>
-        <article class="heritage-card reveal">
-          <div class="heritage-art art-lekharti"><span>03</span><div class="art-silhouette">✦</div></div>
-          <div class="heritage-info"><p class="overline">სამონასტრო კომპლექსი</p><h3>ლექართი</h3><p>მონასტრის ნანგრევები და წერილობით წყაროებში დაცული ცნობები რეგიონის საეკლესიო ქსელის შესწავლის შესაძლებლობას ქმნის.</p></div>
-        </article>
-        <article class="heritage-card reveal">
-          <div class="heritage-art art-gishi"><span>04</span><div class="art-silhouette">✦</div></div>
-          <div class="heritage-info"><p class="overline">გიშის ხეობა</p><h3>გიშის ღვთისმშობლის საყდარი</h3><p>ისტორიულ წყაროებში მოხსენიებული ტაძარი, რომელიც რეგიონის რელიგიური და პოლიტიკური ისტორიის ნაწილად მიიჩნევა.</p></div>
-        </article>
-      </div>
-      <p class="source-note">ფერადი გრაფიკული ფონები დიზაინის დროებითი ილუსტრაციებია და რეალური ძეგლების ფოტოებს არ წარმოადგენს. აქ უნდა ჩაისვას წყაროსა და ლიცენზიის მითითებით შერჩეული ფოტოები.</p>
-    </section>
-
-    <section class="century-section section-pad" id="century">
-      <div class="section-kicker reveal"><span>06</span><span class="kicker-line"></span><span>თანამედროვე ისტორიული მეხსიერება</span></div>
-      <div class="century-layout">
-        <div class="century-copy reveal">
-          <p class="overline">XX საუკუნე · 1918–1921</p>
-          <h2>საზღვრები იცვლება.<br><em>მეხსიერება რჩება.</em></h2>
-          <p>XX საუკუნის დასაწყისში საქართველოს დამოუკიდებლობის აღდგენამ და შემდგომმა საბჭოთა ოკუპაციამ კავკასიის პოლიტიკური რუკა შეცვალა. საინგილოს სტატუსისა და საზღვრების საკითხი იმ პერიოდის რეგიონული ისტორიის ნაწილია.</p>
-          <p>საინგილოში ქართული ენა, ადგილობრივი ტრადიციები და კულტურული მემკვიდრეობა სხვადასხვა ისტორიულ პირობებში გაგრძელდა. ამ თემის სრულყოფილი წარმოდგენისთვის მნიშვნელოვანია როგორც ქართული, ისე რეგიონული საარქივო წყაროების შედარება.</p>
-        </div>
-        <div class="century-panel reveal">
-          <div class="century-panel-top"><span>ARCHIVE / 20TH CENTURY</span><span>1918—1921</span></div>
-          <div class="archive-placeholder">
-            <span class="archive-cross">✳</span>
-            <p>ისტორიული ფოტოარქივი</p>
-            <small>ამ ადგილას დაემატება დათარიღებული საარქივო ფოტოები და დოკუმენტები.</small>
-          </div>
-          <div class="century-panel-bottom"><span>დოკუმენტები · ფოტომასალა · ზეპირი ისტორია</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="closing-section">
-      <div class="closing-glow"></div>
-      <div class="closing-content reveal">
-        <p class="overline">ისტორია გრძელდება</p>
-        <h2>შეისწავლე წარსული.<br><em>შეინარჩუნე მეხსიერება.</em></h2>
-        <a class="button button-primary" href="#home">თავში დაბრუნება ↑</a>
-      </div>
-      <div class="closing-number">H / 01</div>
-    </section>
+    <section class="sources-section section-shell" id="sources"><div class="section-heading reveal"><div><div class="section-kicker">06 — წყარო და მეთოდი</div><h2 class="section-title">ფაქტი და <em>ინტერპრეტაცია</em></h2></div><p>საიტის ისტორიული ტექსტი ეფუძნება მომხმარებლის მიერ მოწოდებულ მასალას. ვიზუალური რუკები და მეომრები განმარტებითი ილუსტრაციებია.</p></div><div class="sources-grid"><article class="source-card reveal"><span class="source-number">01</span><h3>მოწოდებული ტექსტი</h3><p>ჰერეთი, საინგილო, XX საუკუნის დასაწყისი, საქართველოს დემოკრატიული რესპუბლიკა, 1920 წლის ხელშეკრულება, 1921 წლის პოლიტიკური ცვლილებები და კულტურული მემკვიდრეობა.</p><span class="source-status">ძირითადი წყარო</span></article><article class="source-card reveal"><span class="source-number">02</span><h3>რაც წყაროში არ არის</h3><p>მეფეთა სახელები და მეფობის წლები, შუა საუკუნეების ბრძოლები, ზუსტი საზღვრების გეოგრაფიული მონაცემები და სამხედრო აღჭურვილობის აღწერა.</p><span class="source-status status-muted">არ არის დამატებული გამოგონილი ფაქტები</span></article><article class="source-card reveal"><span class="source-number">03</span><h3>ვიზუალური მოდელი</h3><p>ინტერაქტიული რუკები ასახავს ტექსტში ნახსენებ ადგილებსა და მოვლენების თანმიმდევრობას; ისინი არ არის ზუსტი საზღვრის რუკები.</p><span class="source-status">სქემატური წარმოდგენა</span></article></div></section>
   </main>
-
-  <footer class="footer">
-    <a class="brand" href="#home"><span class="brand-symbol">ჰ</span><span class="brand-copy"><strong>ჰერეთი</strong><small>ისტორიული მემკვიდრეობა</small></span></a>
-    <p>საგანმანათლებლო ციფრული პროექტი · წყაროები უნდა მიეთითოს საბოლოო ვერსიაში</p>
-    <a href="#home">ზემოთ ↑</a>
-  </footer>
-
-  <div class="map-modal" id="mapModal" aria-hidden="true">
-    <button class="modal-close" id="modalClose" aria-label="რუკის დახურვა">×</button>
-    <div class="modal-inner">
-      <p class="overline">INTERACTIVE ATLAS</p>
-      <h2>ჰერეთის სქემატური რუკა</h2>
-      <p>სქემატური გამოსახულება — ზუსტი ისტორიული საზღვრები ამ რუკაზე არ არის განსაზღვრული.</p>
-      <a class="button button-primary" href="#map" id="modalGo">რუკის სექციაზე გადასვლა ↗</a>
-    </div>
-  </div>
+  <footer class="site-footer"><a class="brand footer-brand" href="#top"><span class="brand-mark">ჰ</span><span><b>ჰერეთი</b><small>ისტორიის ცოცხალი რუკა</small></span></a><p>ისტორიული მეხსიერება · კულტურული მემკვიდრეობა · გეოგრაფია</p><a href="#top" class="back-top">თავში დაბრუნება ↑</a><span class="footer-copy">© <span id="yearNow"></span> · საგანმანათლებლო პროექტი</span></footer>
 </body>
 </html>
