@@ -28,7 +28,7 @@
       <a href="#kingdom">სამეფო</a>
       <a href="#heritage">მემკვიდრეობა</a>
       <a href="#unification">მეფეთა ქრონიკა</a>
-      <a href="#monuments">ძეგლები</a>
+      <a href="#historical-maps">ეპოქების რუკები</a>\n      <a href="#monuments">ძეგლები</a>
       <a href="#campaign-map">ლაშქრობები</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="მენიუს გახსნა" aria-expanded="false">
@@ -49,7 +49,7 @@
       <a href="#faith"><span>06</span> ჰერთა მოქცევა</a>
       <a href="#heritage"><span>07</span> კულტურული მემკვიდრეობა</a>
       <a href="#unification"><span>08</span> მეფეთა ქრონოლოგია</a>
-      <a href="#monuments"><span>09</span> ჰერეთის ძეგლები</a>
+      <a href="#historical-maps"><span>08A</span> ეპოქების რუკები</a>\n      <a href="#monuments"><span>09</span> ჰერეთის ძეგლები</a>
       <a href="#saingilo"><span>10</span> საინგილო და საზღვრები</a>
       <div class="mobile-menu-note">ისტორია, რომელიც რუკაზე მეტია.</div>
     </div>
@@ -358,7 +358,24 @@
       <p class="davit-note reveal">ქრონოლოგია აერთიანებს მოწოდებულ მასალასა და ზოგად ისტორიულ მიმოხილვას. ცალკეული მმართველების ზუსტი თარიღები და ტიტულები სხვადასხვა წყაროს მიხედვით შესაძლოა განსხვავდებოდეს.</p>
     </section>
 
-    <section class="section monuments-section section-pad cinematic-section" id="monuments">
+    <section class="section historical-maps-section section-pad cinematic-section" id="historical-maps">
+<div class="section-heading"><div class="section-kicker reveal"><span>08A</span> / ისტორიული ატლასი</div><div class="heading-main reveal"><h2>ჰერეთი ეპოქების<br><i>ცვალებად რუკაზე</i></h2><p>ერთი სივრცე, განსხვავებული პოლიტიკური საზღვრები და სახელები.</p></div></div>
+<div class="atlas-intro reveal"><span class="atlas-label">ATLAS / CHOOSE AN ERA</span><p>აირჩიე ეპოქა, რომ ნახო ჰერეთისა და მეზობელი პოლიტიკური ცენტრების სქემატური განლაგება. საზღვრები პირობითია და არა ზუსტი თანამედროვე რუკა.</p></div>
+<div class="atlas-layout reveal"><div class="atlas-map-frame"><div class="atlas-map-top"><span id="atlasEraTitle">VIII–IX საუკუნეები</span><span>SCHEMATIC HISTORICAL MAP</span></div>
+<svg id="atlasMap" viewBox="0 0 760 470" role="img" aria-label="ჰერეთის ისტორიული არეალის სქემატური რუკა">
+<defs><pattern id="atlasPaperDots" width="19" height="19" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="#766747" opacity=".18"/></pattern></defs>
+<rect width="760" height="470" fill="#e9dfc5"/><rect width="760" height="470" fill="url(#atlasPaperDots)"/>
+<path d="M0 80Q95 25 170 77T330 68T500 75T760 35L760 0H0Z" fill="#9b9a79" opacity=".35"/><path d="M0 375Q130 330 255 365T490 350T760 325V470H0Z" fill="#8a9e7b" opacity=".4"/>
+<path d="M-15 145Q90 105 180 133T360 120T560 145T780 105" fill="none" stroke="#8e9f99" stroke-width="14" opacity=".75"/><path d="M45 260Q170 225 255 260T435 270T620 235T780 250" fill="none" stroke="#648e91" stroke-width="8" opacity=".85"/>
+<path class="atlas-territory" d="M200 135L295 110L365 138L420 165L460 225L425 290L360 315L300 295L245 320L190 270L170 205Z" fill="#b69b61" fill-opacity=".62" stroke="#66563a" stroke-width="2.5" stroke-dasharray="7 5"/>
+<path class="atlas-neighbour" d="M400 135L520 115L610 155L630 220L565 260L470 225L420 165Z" fill="#9baf92" fill-opacity=".55" stroke="#6c7d63" stroke-width="1.5"/><path class="atlas-neighbour" d="M115 215L170 205L190 270L245 320L205 370L120 340L80 280Z" fill="#b5c2b0" fill-opacity=".65" stroke="#7d8a76" stroke-width="1.5"/>
+<path d="M180 165Q300 85 430 175T415 295Q300 350 190 270" fill="none" stroke="#7c4f38" stroke-width="2" stroke-dasharray="4 6"/>
+<g fill="#463e2d" font-family="sans-serif" font-size="15"><text x="296" y="205" font-weight="700">ჰერეთი</text><text x="492" y="179">კახეთი</text><text x="103" y="249">რანი</text><text x="270" y="92" font-size="12">კავკასიონის სამხრეთი კალთები</text><text x="535" y="320" font-size="12">ალაზნის აუზი</text></g>
+<g class="atlas-place"><circle cx="315" cy="232" r="5"/><text x="328" y="237">გიში</text></g><g class="atlas-place"><circle cx="368" cy="256" r="5"/><text x="381" y="261">ზეგამი</text></g><g class="atlas-place"><circle cx="257" cy="275" r="5"/><text x="269" y="280">კახი</text></g><g class="atlas-place"><circle cx="335" cy="290" r="5"/><text x="348" y="295">ლექართი</text></g>
+<path d="M45 425H160M45 420V430M160 420V430" stroke="#65563b" stroke-width="2"/><text x="45" y="414" fill="#65563b" font-size="11">სქემატური მასშტაბი</text><text x="716" y="445" text-anchor="end" fill="#65563b" font-size="10">HERETI HISTORICAL ATLAS</text></svg>
+<div class="atlas-legend"><span><i class="legend-heritage"></i> ჰერეთის ისტორიული არეალი</span><span><i class="legend-neighbour"></i> მეზობელი სივრცეები</span><span><i class="legend-route"></i> პირობითი საზღვარი</span></div></div>
+<aside class="atlas-timeline"><button class="atlas-era is-active" type="button" data-atlas-era="0"><span>01</span><b>VIII–IX სს.</b><small>სამთავროს ჩამოყალიბება</small></button><button class="atlas-era" type="button" data-atlas-era="1"><span>02</span><b>X ს.</b><small>სამეფოს გაძლიერება</small></button><button class="atlas-era" type="button" data-atlas-era="2"><span>03</span><b>XI ს.</b><small>კახეთთან პოლიტიკური დაახლოება</small></button><button class="atlas-era" type="button" data-atlas-era="3"><span>04</span><b>შემდგომი ეპოქები</b><small>სახელებისა და საზღვრების ცვლილება</small></button><div class="atlas-note" id="atlasEraNote">VIII–IX საუკუნეებში ჰერეთი ცალკე პოლიტიკურ ერთეულად ყალიბდებოდა. რუკა ისტორიული არეალის ზოგად წარმოდგენას იძლევა და არა ზუსტ საზღვარს.</div></aside></div></section>
+<section class="section monuments-section section-pad cinematic-section" id="monuments">
       <div class="section-heading"><div class="section-kicker reveal"><span>08</span> / მატერიალური მემკვიდრეობა</div><div class="heading-main reveal"><h2>ქვის არქივი<br><i>ჰერეთის ძეგლები</i></h2><p>ტაძრები, ბაზილიკები და მცირე საყდრები — კულტურული მეხსიერების ფრაგმენტები.</p></div></div>
       <div class="monuments-intro reveal"><p>ჰერეთის ძეგლების დიდი ნაწილი ნანგრევების სახითაა შემორჩენილი. წარწერებისა და ზუსტი წერილობითი ცნობების სიმცირე, მრავალჯერადი ნგრევა-აღდგენა და ბუნებრივი პირობები ძეგლების დათარიღებას ართულებს. ამიტომ კვლევისთვის განსაკუთრებით მნიშვნელოვანია არქეოლოგიური მასალა და ხუროთმოძღვრული ანალიზი.</p><span>FIELD NOTES / 11 SITES</span></div>
       <div class="monuments-grid">
