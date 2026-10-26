@@ -22,12 +22,14 @@
     </a>
     <nav class="desktop-nav" aria-label="მთავარი ნავიგაცია">
       <a href="#geography">მდებარეობა</a>
+      <a href="#journey">გზა ჰერეთამდე</a>
       <a href="#origins">წარმოშობა</a>
       <a href="#terms">რანი და ალბანეთი</a>
       <a href="#kingdom">სამეფო</a>
       <a href="#heritage">მემკვიდრეობა</a>
       <a href="#unification">მეფეთა ქრონიკა</a>
       <a href="#monuments">ძეგლები</a>
+      <a href="#campaign-map">ლაშქრობები</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="მენიუს გახსნა" aria-expanded="false">
       <span></span><span></span>
@@ -38,9 +40,11 @@
     <div class="mobile-menu-inner">
       <p class="eyebrow">ნავიგაცია / INDEX</p>
       <a href="#geography"><span>01</span> მდებარეობა და საზღვრები</a>
+      <a href="#journey"><span>01A</span> დედამიწიდან ჰერეთამდე</a>
       <a href="#origins"><span>02</span> სახელწოდება და წარმოშობა</a>
       <a href="#terms"><span>03</span> ჰერეთი, რანი და ალბანეთი</a>
       <a href="#arab-era"><span>04</span> არაბთა ბატონობის ხანა</a>
+      <a href="#campaign-map"><span>04A</span> ლაშქრობების რუკა</a>
       <a href="#kingdom"><span>05</span> ჰერეთის სამთავრო და სამეფო</a>
       <a href="#faith"><span>06</span> ჰერთა მოქცევა</a>
       <a href="#heritage"><span>07</span> კულტურული მემკვიდრეობა</a>
@@ -84,6 +88,25 @@
       </div>
     </section>
 
+
+    <section class="section journey-section section-pad cinematic-section" id="journey">
+      <div class="section-heading">
+        <div class="section-kicker reveal"><span>00A</span> / სივრციდან სივრცემდე</div>
+        <div class="heading-main reveal"><h2>დედამიწიდან<br><i>ჰერეთამდე</i></h2><p>გლობალური ხედიდან კავკასიის ისტორიულ ლანდშაფტამდე — ოთხი მასშტაბი, ერთი გზა.</p></div>
+      </div>
+      <div class="journey-intro reveal"><p>მოგზაურობა იწყება დედამიწის სფეროთი, გადადის ევროპაზე, შემდეგ საქართველოზე და ბოლოს ჰერეთის ისტორიულ სივრცეზე. ეს არის ვიზუალური ორიენტირი და არა ზუსტი კარტოგრაფიული პროექცია.</p><span>EARTH → EUROPE → GEORGIA → HERETI</span></div>
+      <div class="journey-track">
+        <article class="journey-stop reveal"><div class="journey-art earth-art" aria-hidden="true"><span class="earth-grid"></span><span class="earth-land land-one"></span><span class="earth-land land-two"></span><span class="earth-glow"></span></div><span class="journey-step">01 / პლანეტა</span><h3>დედამიწა</h3><p>კავკასია ევრაზიის დამაკავშირებელ სივრცეში.</p></article>
+        <div class="journey-connector" aria-hidden="true">↘</div>
+        <article class="journey-stop reveal"><div class="journey-art europe-art" aria-hidden="true"><div class="continent-shape"></div><span class="journey-pin"></span><span class="journey-label">EUROPE</span></div><span class="journey-step">02 / კონტინენტი</span><h3>ევროპა და ევრაზია</h3><p>გზა შავი ზღვისა და კავკასიის მიმართულებით.</p></article>
+        <div class="journey-connector" aria-hidden="true">↘</div>
+        <article class="journey-stop reveal"><div class="journey-art georgia-art" aria-hidden="true"><div class="georgia-shape"></div><span class="journey-pin"></span><span class="journey-label">საქართველო</span></div><span class="journey-step">03 / ქვეყანა</span><h3>საქართველო</h3><p>აღმოსავლეთ საქართველოს ისტორიული რეგიონების გზაჯვარედინი.</p></article>
+        <div class="journey-connector" aria-hidden="true">↘</div>
+        <article class="journey-stop journey-stop-final reveal"><div class="journey-art hereti-art" aria-hidden="true"><div class="hereti-shape"></div><span class="journey-pin"></span><span class="journey-label">HERETI</span></div><span class="journey-step">04 / ისტორიული მხარე</span><h3>ჰერეთი</h3><p>ალაზნისა და მტკვრის აუზებთან დაკავშირებული ცვალებადი ისტორიული სივრცე.</p></article>
+      </div>
+      <p class="journey-footnote reveal">გრაფიკული ილუსტრაციები სიმბოლურია; ისტორიული ჰერეთის საზღვრები ყველა ეპოქაში ერთნაირი არ ყოფილა.</p>
+    </section>
+
     <section class="section geography section-pad cinematic-section" id="geography">
       <div class="section-heading">
         <div class="section-kicker reveal"><span>01</span> / სივრცე</div>
@@ -108,6 +131,14 @@
               <g class="map-point" tabindex="0" role="button" aria-label="გულგულა"><circle cx="455" cy="145" r="7"/><circle cx="455" cy="145" r="15" class="point-ring"/><text x="474" y="141">გულგულა</text><text x="474" y="159" class="map-sub">ჩრდილოეთი ორიენტირი</text></g>
               <g class="map-point" tabindex="0" role="button" aria-label="შაქი"><circle cx="235" cy="226" r="7"/><circle cx="235" cy="226" r="15" class="point-ring"/><text x="199" y="205">შაქი</text><text x="199" y="188" class="map-sub">ისტორიული ცენტრი</text></g>
               <g class="map-point" tabindex="0" role="button" aria-label="იორ-ალაზნის შესართავი"><circle cx="333" cy="301" r="7"/><circle cx="333" cy="301" r="15" class="point-ring"/><text x="347" y="325">იორ-ალაზნის</text><text x="347" y="342">შესართავი</text></g>
+
+              <g class="map-point" tabindex="0" role="button" aria-label="გიში"><circle cx="286" cy="184" r="6"/><circle cx="286" cy="184" r="13" class="point-ring"/><text x="270" y="169" text-anchor="end">გიში</text></g>
+              <g class="map-point" tabindex="0" role="button" aria-label="ზეგამი"><circle cx="374" cy="222" r="6"/><circle cx="374" cy="222" r="13" class="point-ring"/><text x="389" y="216">ზეგამი</text></g>
+              <g class="map-point" tabindex="0" role="button" aria-label="კახი"><circle cx="190" cy="275" r="6"/><circle cx="190" cy="275" r="13" class="point-ring"/><text x="174" y="294" text-anchor="end">კახი</text></g>
+              <g class="map-point" tabindex="0" role="button" aria-label="ლექართი"><circle cx="246" cy="316" r="6"/><circle cx="246" cy="316" r="13" class="point-ring"/><text x="229" y="334" text-anchor="end">ლექართი</text></g>
+              <g class="map-point" tabindex="0" role="button" aria-label="ყუმი"><circle cx="413" cy="270" r="6"/><circle cx="413" cy="270" r="13" class="point-ring"/><text x="428" y="268">ყუმი</text></g>
+              <g class="map-point" tabindex="0" role="button" aria-label="ქურმუხი"><circle cx="172" cy="232" r="6"/><circle cx="172" cy="232" r="13" class="point-ring"/><text x="156" y="218" text-anchor="end">ქურმუხი</text></g>
+              <g class="map-point" tabindex="0" role="button" aria-label="მაწიმი"><circle cx="310" cy="365" r="6"/><circle cx="310" cy="365" r="13" class="point-ring"/><text x="292" y="384" text-anchor="end">მაწიმი</text></g>
               <text x="350" y="105" class="map-region">კავკასიონი</text>
               <text x="365" y="382" class="map-river-label">მტკვარი / მდინარეთა სისტემა</text>
               <text x="330" y="240" class="map-center">ჰერეთი</text>
@@ -197,6 +228,33 @@
         <article class="timeline-item reveal"><div class="timeline-year">735–736</div><div class="timeline-dot"></div><div class="timeline-card"><span>დიდი ლაშქრობა</span><h3>მურვან ყრუს შემოსევები</h3><p>მურვან ყრუს ლაშქრობამ საქართველოს სხვადასხვა მხარე დააზარალა. თბილისში მოგვიანებით დამკვიდრებული ამირას ხელისუფლება არაბული მმართველობის მნიშვნელოვანი ინსტიტუტი გახდა.</p></div></article>
         <article class="timeline-item reveal"><div class="timeline-year">853–854</div><div class="timeline-dot"></div><div class="timeline-card"><span>თბილისის აოხრება</span><h3>ბუღა თურქის ლაშქრობა</h3><p>ბუღა თურქმა თბილისი აიღო და გადაწვა, თუმცა რეგიონში არაბთა ადრინდელი გავლენის სრულად აღდგენა ვერ შეძლო.</p></div></article>
       </div>
+
+      <div class="campaign-panel reveal" id="campaign-map">
+        <div class="campaign-heading"><div><span class="campaign-kicker">FIELD MAP / VII–IX სს.</span><h3>არაბთა ლაშქრობები<br><i>კავკასიის გზაჯვარედინზე</i></h3></div><p>სტრატეგიული სქემა — არა ერთი დადასტურებული ბრძოლის ზუსტი გეგმა.</p></div>
+        <div class="campaign-map">
+          <svg viewBox="0 0 820 360" role="img" aria-label="კავკასიის არაბთა ლაშქრობების სქემატური რუკა">
+            <defs><pattern id="campaignDots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#d7cba7" opacity=".22"/></pattern><marker id="arrowArab" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#d4b56a"/></marker><marker id="arrowLocal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b4d56c"/></marker></defs>
+            <rect width="820" height="360" fill="#172219"/><rect width="820" height="360" fill="url(#campaignDots)"/>
+            <path d="M0 80 Q130 35 220 74 T410 68 T610 80 T820 48 L820 0 L0 0Z" fill="#6c8061" opacity=".38"/>
+            <path d="M20 255 Q140 218 260 245 T470 230 T660 256 T820 215" fill="none" stroke="#76a6a0" stroke-width="8" opacity=".6"/>
+            <path d="M40 288 Q160 275 260 250 T450 198 T650 130" fill="none" stroke="#d4b56a" stroke-width="4" stroke-dasharray="8 7" marker-end="url(#arrowArab)"/>
+            <path d="M620 282 Q530 250 460 220 T330 170" fill="none" stroke="#b4d56c" stroke-width="4" stroke-dasharray="6 7" marker-end="url(#arrowLocal)"/>
+            <path d="M282 130 L340 100 L397 124 L431 165 L405 209 L350 222 L305 192 Z" fill="#b5cc83" opacity=".55" stroke="#dce7c5" stroke-width="1.5" stroke-dasharray="4 5"/>
+            <circle cx="351" cy="170" r="8" fill="#d4b56a"/><circle cx="351" cy="170" r="18" fill="none" stroke="#d4b56a" opacity=".6"/>
+            <text x="370" y="162" fill="#f3f0e4" font-size="14">ჰერეთის ისტორიული არეალი</text>
+            <text x="72" y="320" fill="#d4b56a" font-size="14">არაბთა ლაშქრობების მიმართულება</text>
+            <text x="484" y="306" fill="#b4d56c" font-size="14">ადგილობრივი ძალების სივრცე</text>
+            <text x="98" y="115" fill="#e4e0d3" font-size="18">არაბთა სახალიფო</text><text x="546" y="98" fill="#e4e0d3" font-size="16">ქართლი / კავკასია</text>
+            <text x="410" y="344" fill="#a9b39f" font-size="11">სქემატური მარშრუტები · არა ზუსტი საზღვრები</text>
+          </svg>
+        </div>
+        <div class="campaign-commanders">
+          <article class="commander-card commander-arab"><span>ლაშქრობის მხარე</span><h4>მურვან იბნ მუჰამედი</h4><p>მურვან ყრუ — არაბთა სარდალი, რომლის 735–736 წლების ლაშქრობა საქართველოს სხვადასხვა მხარეს შეეხო.</p></article>
+          <div class="campaign-vs">VS</div>
+          <article class="commander-card commander-local"><span>ადგილობრივი მხარე</span><h4>ქართული პოლიტიკური ძალები</h4><p>კონკრეტულად ჰერეთის ტერიტორიაზე ამ ლაშქრობისას მოწინააღმდეგე სარდლის სახელი სანდოდ დადასტურებული არ არის; ამიტომ გამოგონილი სახელი არ არის მითითებული.</p></article>
+        </div>
+        <p class="campaign-caution">მნიშვნელოვანი შენიშვნა: ეს რუკა ასახავს ფართო რეგიონულ სამხედრო კონტექსტს. იგი არ ამტკიცებს, რომ აღწერილი დაპირისპირება ზუსტად ამ წერტილში ან ჰერეთის შიგნით მოხდა.</p>
+      </div>
       <p class="timeline-footnote reveal">ქრონოლოგია წარმოდგენილია საქართველოსა და ამიერკავკასიის საერთო პოლიტიკური ფონის საჩვენებლად. კონკრეტულად ჰერეთის ტერიტორიაზე მომხდარი მოვლენები დამატებით სპეციალურ წყაროებთან შეჯერებას საჭიროებს.</p>
     </section>
 
@@ -264,6 +322,13 @@
     <section class="section davit-section section-pad cinematic-section kings-section" id="unification">
       <div class="section-heading"><div class="section-kicker reveal"><span>08</span> / სამეფო ქრონიკა</div><div class="heading-main reveal"><h2>მეფეები და<br><i>ცვალებადი სამეფო</i></h2><p>ჰერეთისა და კახეთ-ჰერეთის პოლიტიკური ქრონიკა — მმართველები, ძალაუფლების ცვლილება და საქართველოს გაერთიანების გზა.</p></div></div>
       <div class="kings-intro reveal"><div class="kings-intro-number">VIII—XII <small>საუკუნეები</small></div><p>ჰერეთის ისტორია ერთი მეფის ამბავი არ არის. ის პოლიტიკური ცენტრების ჩამოყალიბების, მეზობელ სამეფოებთან კონკურენციის, ქრისტიანული კულტურისა და კახეთთან გაერთიანების ხანგრძლივი პროცესია.</p></div>
+
+      <div class="ruler-portraits">
+        <article class="ruler-portrait reveal"><div class="ruler-bust bust-grigol"><span class="crown">✦</span><span class="bust-head"></span><span class="bust-cloak"></span><span class="bust-mark">GH</span></div><span class="portrait-era">IX საუკუნე</span><h3>გრიგოლ ჰამამი</h3><p>ჰერეთის სამეფო ძალაუფლების ჩამოყალიბების ერთ-ერთი მნიშვნელოვანი სახელი.</p><small>მხატვრული რეკონსტრუქცია · არა ისტორიული პორტრეტი</small></article>
+        <article class="ruler-portrait reveal"><div class="ruler-bust bust-ishkhanik"><span class="crown">✦</span><span class="bust-head"></span><span class="bust-cloak"></span><span class="bust-mark">I</span></div><span class="portrait-era">X საუკუნე</span><h3>იშხანიკი</h3><p>ჰერეთის პოლიტიკური ისტორია და სარწმუნოებრივი გარდაქმნები.</p><small>მხატვრული რეკონსტრუქცია · არა ისტორიული პორტრეტი</small></article>
+        <article class="ruler-portrait reveal"><div class="ruler-bust bust-dinari"><span class="crown">✦</span><span class="bust-head"></span><span class="bust-cloak"></span><span class="bust-mark">D</span></div><span class="portrait-era">X საუკუნე</span><h3>დედოფალი დინარი</h3><p>მეხსიერებაში შემორჩენილი მმართველი ქალი და ქრისტიანული ტრადიცია.</p><small>მხატვრული რეკონსტრუქცია · არა ისტორიული პორტრეტი</small></article>
+        <article class="ruler-portrait reveal"><div class="ruler-bust bust-kvirike"><span class="crown">✦</span><span class="bust-head"></span><span class="bust-cloak"></span><span class="bust-mark">III</span></div><span class="portrait-era">XI საუკუნე</span><h3>კვირიკე III დიდი</h3><p>კახეთ-ჰერეთის გაძლიერება და რეგიონული პოლიტიკური გავლენა.</p><small>მხატვრული რეკონსტრუქცია · არა ისტორიული პორტრეტი</small></article>
+      </div>
       <div class="kings-layout">
         <div class="kings-rail" aria-label="მეფეთა ქრონოლოგია">
           <div class="kings-rail-line"></div>
