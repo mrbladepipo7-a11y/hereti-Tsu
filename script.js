@@ -1,92 +1,262 @@
-'use strict';
+(() => {
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
-// Historical claims below are limited to the user's supplied source text.
-const timelineEvents = [
-  {date:'საუკუნეების განმავლობაში',title:'ჰერეთი და კახეთი',category:'culture',tag:'ისტორიული კავშირი',text:'ჰერეთი მჭიდროდ იყო დაკავშირებული კახეთთან და საქართველოს პოლიტიკურ, კულტურულ და რელიგიურ ცხოვრებასთან.'},
-  {date:'XX საუკუნის დასაწყისი',title:'სამხრეთ კავკასიის პოლიტიკური გარდაქმნა',category:'politics',tag:'რეგიონული კონტექსტი',text:'რუსეთის იმპერიის დაშლამ და ახალი სახელმწიფოების ჩამოყალიბების პროცესმა რეგიონში არსებული ტერიტორიული საკითხები გაამწვავა.'},
-  {date:'1918 წლის 26 მაისი',title:'საქართველოს დამოუკიდებლობა',category:'politics',tag:'საქართველოს დემოკრატიული რესპუბლიკა',text:'საქართველომ დამოუკიდებლობა გამოაცხადა. ახალ სახელმწიფოს წინაშე იდგა საზღვრების დადგენისა და ტერიტორიული მთლიანობის საკითხები.'},
-  {date:'1920 წლის 7 მაისი',title:'ხელშეკრულება საბჭოთა რუსეთთან',category:'politics',tag:'ზაქათალის ოლქი',text:'მოწოდებული ტექსტის მიხედვით, ხელშეკრულებით ზაქათალის ოლქი საქართველოსთან დაკავშირებულ ტერიტორიად იქნა აღიარებული, თუმცა საკითხი საბოლოოდ გადაწყვეტილი არ ყოფილა.'},
-  {date:'1921 წელი',title:'საქართველოს ოკუპაცია',category:'politics',tag:'პოლიტიკური გარდატეხა',text:'საბჭოთა რუსეთის სამხედრო თავდასხმის შედეგად საქართველოს დემოკრატიული რესპუბლიკა დაეცა. საბჭოთა ხელისუფლების დამყარებამ საზღვრების საკითხზე მნიშვნელოვანი გავლენა მოახდინა.'},
-  {date:'1921 წლის ივლისი',title:'საინგილო აზერბაიჯანის შემადგენლობაში',category:'politics',tag:'ადმინისტრაციული საზღვარი',text:'საქართველოსა და აზერბაიჯანის საბჭოთა რესპუბლიკებს შორის მიღებული გადაწყვეტილებით, საინგილო აზერბაიჯანის შემადგენლობაში დარჩა.'},
-  {date:'საბჭოთა პერიოდი',title:'ენისა და ტრადიციების შენარჩუნება',category:'identity',tag:'ენა და იდენტობა',text:'წყაროს მიხედვით, ადგილობრივი ქართველების ნაწილმა შეინარჩუნა ქართული ენა, ტრადიციები და კულტურული მემკვიდრეობის ნაწილი. ინგილოებში იყვნენ ქრისტიანი და მუსლიმი ქართველები.'},
-  {date:'დღემდე არსებული მემკვიდრეობა',title:'ქართული კულტურული ძეგლები',category:'culture',tag:'კულტურული მეხსიერება',text:'ქურმუხის წმინდა გიორგის ტაძარი და სხვა ისტორიული ძეგლები ტექსტში ქართული კულტურისა და მრავალსაუკუნოვანი კავშირების მნიშვნელოვან ნიშნებად არის წარმოდგენილი.'}
-];
+  // Footer year
+  $('#year').textContent = new Date().getFullYear();
 
-const mapModes = {
-  region: {number:'MAP 01',label:'ისტორიული კავშირები',title:'ჰერეთი და მიმდებარე მხარეები',description:'საინგილო, რომელიც კახის, ზაქათალისა და ბელაქნის მიდამოებს მოიცავს, ისტორიულად უკავშირდება ჰერეთის ჩრდილო-აღმოსავლეთ ნაწილს. რუკა ამ კავშირების სქემატური ილუსტრაციაა.',fill:'rgba(156,137,91,.38)',boundary:'M349 139 Q392 206 386 374',overlay:'ისტორიული კავშირები'},
-  '1920': {number:'MAP 02',label:'ხელშეკრულება · 1920',title:'ზაქათალის ოლქის საკითხი',description:'1920 წლის 7 მაისის ხელშეკრულებით ზაქათალის ოლქი საქართველოსთან დაკავშირებულ ტერიტორიად იქნა აღიარებული; მოწოდებული ტექსტი ხაზს უსვამს, რომ საკითხი საბოლოოდ გადაწყვეტილი არ ყოფილა.',fill:'rgba(213,189,130,.5)',boundary:'M320 128 Q390 184 430 260 T386 374',overlay:'1920 · საკითხი ღია რჩება'},
-  '1921': {number:'MAP 03',label:'ადმინისტრაციული ცვლილება · 1921',title:'საინგილოს პოლიტიკური მდგომარეობა',description:'წყაროს მიხედვით, 1921 წლის ივლისში მიღებული გადაწყვეტილებით საინგილო აზერბაიჯანის შემადგენლობაში დარჩა. რუკა ცვლილების იდეას სქემატურად აჩვენებს და ზუსტ სახელმწიფო საზღვრებს არ განსაზღვრავს.',fill:'rgba(133,151,119,.35)',boundary:'M349 139 Q355 215 420 245 T520 281',overlay:'1921 · ადმინისტრაციული ცვლილება'}
-};
-const placeDescriptions = {
-  kakheti:['კახეთი','წყარო ჰერეთის ხანგრძლივ კავშირს კახეთთან და საქართველოს პოლიტიკურ, კულტურულ და რელიგიურ ცხოვრებასთან აღნიშნავს.'],
-  zagatala:['ზაქათალის ოლქი','1920 წლის 7 მაისის ხელშეკრულებით საქართველოსთან დაკავშირებულ ტერიტორიად იქნა აღიარებული; საკითხი საბოლოოდ გადაწყვეტილი არ ყოფილა.'],
-  belokani:['ბელაქანი','ბელაქნის მიდამოები ტექსტში საინგილოს გეოგრაფიულ არეალთან არის დაკავშირებული.'],
-  kakh:['კახი','კახი ტექსტში საინგილოს იმ მიდამოებს შორისაა ნახსენები, რომლებიც ისტორიულ ჰერეთთან კავშირში განიხილება.']
-};
+  // Mobile menu
+  const menuToggle = $('#menuToggle');
+  const mobileMenu = $('#mobileMenu');
+  function closeMenu() {
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'მენიუს გახსნა');
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('menu-open');
+  }
+  menuToggle.addEventListener('click', () => {
+    const opening = menuToggle.getAttribute('aria-expanded') !== 'true';
+    menuToggle.setAttribute('aria-expanded', String(opening));
+    menuToggle.setAttribute('aria-label', opening ? 'მენიუს დახურვა' : 'მენიუს გახსნა');
+    mobileMenu.classList.toggle('open', opening);
+    mobileMenu.setAttribute('aria-hidden', String(!opening));
+    document.body.classList.toggle('menu-open', opening);
+  });
+  $$('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeMenu(); closeModal(); } });
 
-const timelineList = document.getElementById('timelineList');
-function renderTimeline(filter='all') {
-  const filtered = timelineEvents.filter(event => filter === 'all' || event.category === filter);
-  timelineList.innerHTML = filtered.map((event, index) => `
-    <article class="timeline-item" style="animation-delay:${index * 55}ms">
-      <div class="timeline-date">${event.date}</div><h3>${event.title}</h3><p>${event.text}</p><span class="timeline-tag">${event.tag}</span>
-    </article>`).join('');
-}
-renderTimeline();
-document.querySelectorAll('.filter-button').forEach(button => button.addEventListener('click', () => {
-  document.querySelectorAll('.filter-button').forEach(item => item.classList.toggle('active', item === button));
-  renderTimeline(button.dataset.filter);
-}));
+  // Scroll progress
+  const progress = $('#readingProgress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 
-document.querySelectorAll('.map-tab').forEach(button => button.addEventListener('click', () => {
-  document.querySelectorAll('.map-tab').forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-selected', String(active)); });
-  const mode = mapModes[button.dataset.map];
-  document.getElementById('mapNumber').textContent = mode.number;
-  document.getElementById('mapTitle').textContent = mode.title;
-  document.getElementById('mapDescription').textContent = mode.description;
-  document.getElementById('mapOverlayLabel').textContent = mode.overlay;
-  document.querySelector('.region-fill').style.fill = mode.fill;
-  document.querySelector('.boundary-dash').setAttribute('d', mode.boundary);
-  document.getElementById('placeInfo').innerHTML = '<strong>აირჩიე რუკაზე მონიშნული ადგილი</strong><span>მოკლე განმარტება აქ გამოჩნდება.</span>';
-}));
-function showPlace(place) {
-  const item = placeDescriptions[place];
-  if (!item) return;
-  document.getElementById('placeInfo').innerHTML = `<strong>${item[0]}</strong><span>${item[1]}</span>`;
-}
-document.querySelectorAll('.map-city').forEach(point => {
-  point.addEventListener('click', () => showPlace(point.dataset.place));
-  point.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showPlace(point.dataset.place); } });
-});
+  // Reveal animations: stagger sibling items lightly and respect reduced motion
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reducedMotion) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+    $$('.reveal').forEach((el, index) => {
+      el.style.transitionDelay = `${Math.min((index % 4) * 55, 165)}ms`;
+      observer.observe(el);
+    });
+  } else {
+    $$('.reveal').forEach(el => el.classList.add('is-visible'));
+  }
 
-document.querySelectorAll('.motion-button').forEach(button => button.addEventListener('click', () => {
-  const card = button.closest('.warrior-card');
-  const active = card.classList.toggle('is-animated');
-  button.setAttribute('aria-pressed', String(active));
-  button.innerHTML = active ? 'მოძრაობის შეჩერება <span>Ⅱ</span>' : 'მოძრაობის ჩვენება <span>↗</span>';
-}));
+  // Subtle parallax on the hero art, disabled for touch/reduced-motion
+  const heroArt = $('.hero-art');
+  if (heroArt && !reducedMotion && window.matchMedia('(pointer:fine)').matches) {
+    window.addEventListener('pointermove', event => {
+      const x = (event.clientX / window.innerWidth - .5) * 9;
+      const y = (event.clientY / window.innerHeight - .5) * 7;
+      heroArt.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }, { passive: true });
+  }
 
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
-menuToggle.addEventListener('click', () => {
-  const open = mainNav.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(open));
-  menuToggle.setAttribute('aria-label', open ? 'მენიუს დახურვა' : 'მენიუს გახსნა');
-});
-mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-  mainNav.classList.remove('open'); menuToggle.setAttribute('aria-expanded', 'false');
-}));
+  // Modal details for heritage cards
+  const modal = $('#detailModal');
+  const modalTitle = $('#modalTitle');
+  const modalText = $('#modalText');
+  let previousFocus = null;
+  function openModal(title, detail, trigger) {
+    previousFocus = trigger || document.activeElement;
+    modalTitle.textContent = title;
+    modalText.textContent = detail;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    $('[data-close-modal]', modal).focus?.();
+  }
+  function closeModal() {
+    if (!modal.classList.contains('open')) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (previousFocus && previousFocus.focus) previousFocus.focus();
+  }
+  $$('.details-button').forEach(button => button.addEventListener('click', () => {
+    openModal(button.dataset.title, button.dataset.detail, button);
+  }));
+  $$('[data-close-modal]').forEach(el => el.addEventListener('click', closeModal));
 
-const progress = document.getElementById('scrollProgress');
-function updateProgress() {
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.width = `${scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0}%`;
-}
-window.addEventListener('scroll', updateProgress, {passive:true});
-updateProgress();
+  // Schematic map points respond to click and keyboard focus
+  $$('.map-point').forEach(point => {
+    point.addEventListener('click', () => {
+      $$('.map-point').forEach(other => other.classList.remove('active'));
+      point.classList.add('active');
+    });
+    point.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        point.click();
+      }
+    });
+  });
 
-const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
-}), {threshold:0.12});
-document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
-document.getElementById('yearNow').textContent = new Date().getFullYear();
+  // Cinematic motion system (GSAP is progressive enhancement; native CSS remains the fallback).
+  const topbar = $('.topbar');
+  const cursorGlow = document.createElement('div');
+  cursorGlow.className = 'cursor-glow';
+  cursorGlow.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(cursorGlow);
+
+  if (!reducedMotion && window.matchMedia('(pointer:fine)').matches) {
+    window.addEventListener('pointermove', event => {
+      cursorGlow.style.opacity = '1';
+      cursorGlow.style.left = `${event.clientX}px`;
+      cursorGlow.style.top = `${event.clientY}px`;
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => { cursorGlow.style.opacity = '0'; });
+  }
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      topbar?.classList.toggle('scrolled', window.scrollY > 24);
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  if (window.gsap && !reducedMotion) {
+    gsap.registerPlugin(window.ScrollTrigger);
+    gsap.config({ nullTargetWarn: false });
+
+    // Opening sequence: editorial title, then supporting copy, then the landscape.
+    const heroTitle = $('.hero-title');
+    if (heroTitle) {
+      gsap.fromTo(heroTitle.querySelector('span'),
+        { yPercent: 115, rotate: 2, scale: .94, transformOrigin: 'left bottom' },
+        { yPercent: 0, rotate: 0, scale: 1, duration: 1.35, ease: 'power4.out', delay: .12 });
+      gsap.fromTo(heroTitle.querySelector('em'),
+        { y: 48, autoAlpha: 0, skewY: 3 },
+        { y: 0, autoAlpha: 1, skewY: 0, duration: 1.1, ease: 'power3.out', delay: .38 });
+      gsap.fromTo('.hero-art .sun-disc',
+        { scale: .72, autoAlpha: 0, rotate: -12 },
+        { scale: 1, autoAlpha: 1, rotate: 0, duration: 1.7, ease: 'power3.out', delay: .22 });
+      gsap.fromTo('.hero-art .ridge',
+        { y: 90, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 1.5, stagger: .13, ease: 'power4.out', delay: .35 });
+    }
+
+    // Large landscape moves against the page scroll for a cinematic depth effect.
+    if (window.ScrollTrigger && $('.hero-art')) {
+      gsap.to('.hero-art', {
+        yPercent: 16, scale: 1.06, rotate: -2,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.1 }
+      });
+      gsap.to('.hero-copy', {
+        y: -70, autoAlpha: .2, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+      });
+      gsap.to('.hero-grid', {
+        yPercent: 20, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.3 }
+      });
+    }
+
+    // Editorial heading reveals and card entrances are staggered as each chapter enters.
+    $$('.cinematic-section').forEach((section, sectionIndex) => {
+      const heading = $('.heading-main h2', section);
+      if (heading) {
+        gsap.fromTo(heading,
+          { y: 70, autoAlpha: 0, clipPath: 'inset(0 0 100% 0)' },
+          { y: 0, autoAlpha: 1, clipPath: 'inset(0 0 0% 0)', duration: 1.15, ease: 'power4.out',
+            scrollTrigger: { trigger: heading, start: 'top 88%', once: true } });
+      }
+      const cards = $$('.term-card, .mini-card, .heritage-card, .source-row, .kingdom-step, .timeline-item', section);
+      if (cards.length) {
+        gsap.fromTo(cards,
+          { y: 45, autoAlpha: 0, rotateX: 2 },
+          { y: 0, autoAlpha: 1, rotateX: 0, duration: .9, stagger: .095, ease: 'power3.out',
+            clearProps: 'transform', scrollTrigger: { trigger: cards[0], start: 'top 91%', once: true } });
+      }
+      const sectionArt = $$('.origin-image, .geo-map-card, .kingdom-banner, .faith-art', section);
+      sectionArt.forEach(art => {
+        gsap.fromTo(art,
+          { y: 42, scale: .97, autoAlpha: .6 },
+          { y: 0, scale: 1, autoAlpha: 1, duration: 1.15, ease: 'power3.out',
+            scrollTrigger: { trigger: art, start: 'top 92%', once: true } });
+      });
+      section.style.setProperty('--chapter-index', sectionIndex + 1);
+    });
+
+    // Subtle scroll-linked image movement, not a distracting constant animation.
+    if (window.ScrollTrigger) {
+      $$('.heritage-photo, .origin-image').forEach(art => {
+        gsap.fromTo(art, { backgroundPosition: '50% 58%' }, {
+          backgroundPosition: '50% 42%', ease: 'none',
+          scrollTrigger: { trigger: art, start: 'top bottom', end: 'bottom top', scrub: .8 }
+        });
+      });
+    }
+
+    // Magnetic micro-interaction on primary buttons for mouse users only.
+    if (window.matchMedia('(pointer:fine)').matches) {
+      $$('.button').forEach(button => {
+        button.addEventListener('pointermove', event => {
+          const rect = button.getBoundingClientRect();
+          const dx = (event.clientX - rect.left - rect.width / 2) * .08;
+          const dy = (event.clientY - rect.top - rect.height / 2) * .12;
+          gsap.to(button, { x: dx, y: dy, duration: .35, ease: 'power3.out', overwrite: true });
+        });
+        button.addEventListener('pointerleave', () => gsap.to(button, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.45)', overwrite: true }));
+      });
+    }
+  }
+
+  // Navigation active section hint
+  const navLinks = $$('.desktop-nav a');
+  const sections = navLinks.map(link => $(link.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const link = navLinks.find(a => a.getAttribute('href') === `#${entry.target.id}`);
+        if (link && entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    sections.forEach(section => navObserver.observe(section));
+  }
+})();
+
+  // Floating animated Hereti mini-map: collapse/expand control.
+  const floatingMap = $('#floatingMap');
+  const mapToggle = $('#mapToggle');
+  if (floatingMap && mapToggle) {
+    mapToggle.addEventListener('click', () => {
+      const collapsed = floatingMap.classList.toggle('is-collapsed');
+      mapToggle.textContent = collapsed ? '+' : '−';
+      mapToggle.setAttribute('aria-label', collapsed ? 'მინი რუკის გახსნა' : 'მინი რუკის დახურვა');
+    });
+  }
+
+  // Fixed side index follows the section currently in view.
+  const sideLinks = $$('.side-index a');
+  if (sideLinks.length && 'IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        sideLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+      });
+    }, { rootMargin: '-38% 0px -48% 0px', threshold: 0 });
+    sideLinks.forEach(link => {
+      const target = $(link.getAttribute('href'));
+      if (target) sectionObserver.observe(target);
+    });
+  }

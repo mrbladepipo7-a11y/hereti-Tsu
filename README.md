@@ -1,15 +1,46 @@
-# ჰერეთი — ისტორიის ცოცხალი რუკა
+# ჰერეთი — მეხსიერების მიწა
 
-Responsive one-page Georgian-language historical website. Built with plain HTML, CSS, and JavaScript; no build step or framework required.
+ქართული ენის ერთგვერდიანი, ადაპტირებული ისტორიული ვებპროექტი. აგებულია HTML, CSS და Vanilla JavaScript-ით — დამატებითი build ან npm არ სჭირდება.
 
-## Run locally
-Open `index.html` in a modern browser. Google Fonts are loaded online; system fallbacks are included.
+## ფაილები
+- `index.html` — საიტის შინაარსი და სექციები
+- `style.css` — დიზაინი, responsive layout და ანიმაციები
+- `script.js` — მობილური მენიუ, scroll progress, reveal-ანიმაციები და დეტალების ფანჯრები
 
-## Deploy to GitHub Pages
-1. Upload `index.html`, `style.css`, `script.js`, and this README to the repository root.
-2. In GitHub, open **Settings → Pages**.
-3. Select the deployment branch and `/ (root)` folder, then save.
-4. Wait for the Pages deployment to finish and reload the site.
+## GitHub Pages-ზე ატვირთვა
+1. ჩამოტვირთე ZIP და ამოაარქივე.
+2. GitHub-ზე შექმენი ახალი repository (მაგ. `hereti-history`).
+3. ატვირთე `index.html`, `style.css`, `script.js` და `README.md` repository-ის მთავარ/root საქაღალდეში.
+4. გახსენი **Settings → Pages**.
+5. **Build and deployment** ნაწილში აირჩიე **Deploy from a branch**.
+6. Branch-ში აირჩიე `main`, საქაღალდეში `/ (root)` და დააჭირე **Save**.
+7. რამდენიმე წუთში GitHub Pages გაჩვენებს საიტის მისამართს.
 
-## Historical accuracy note
-The supplied source discusses Hereti and Ingilo in relation to the early 20th century, the Democratic Republic of Georgia, the 7 May 1920 treaty, the 1921 political change, language and traditions, and the Khurmukh St George church. It does **not** provide a list of medieval kings, reign dates, named battles, exact historical border coordinates, or warrior equipment. The site therefore does not invent a king list or battle chronology. The maps are clearly labelled schematic illustrations; warrior figures and church artwork are CSS illustrations, not documentary reconstructions.
+## დიზაინის შენიშვნები
+დიზაინი შთაგონებულია თანამედროვე, კინემატოგრაფიული ვებგამოცდილებებით: დიდი ტიპოგრაფია, მკვეთრი კონტრასტი, სქროლზე გამოჩენილი ელემენტები და მცირე ინტერაქციები. ის არ აკოპირებს Lando Norris-ის საიტის კონკრეტულ ბრენდულ მასალებს ან კოდს.
+
+## ისტორიული სიზუსტე
+რუკა სქემატურია და არ უნდა იქნეს გამოყენებული როგორც ზუსტი საზღვრის რუკა. საიტის ტექსტი წარმოადგენს საწყის მიმოხილვას. ზოგიერთი თარიღი, ტიტულატურა და რელიგიური/ეთნიკური პროცესის აღწერა საჭიროებს დამატებით წყაროთმცოდნეობით გადამოწმებას. გვერდზე მოცემულია რამდენიმე კვლევის ბმული საწყისი ორიენტირისთვის.
+
+
+## განახლებული ვერსიის ატვირთვა არსებულ GitHub Pages-ზე
+
+1. ამოარქივე `hereti-Tsu-upgrade.zip`.
+2. GitHub-ზე გახსენი შენი `hereti-Tsu` repository.
+3. ატვირთე არქივში არსებული ოთხი ფაილი (`index.html`, `style.css`, `script.js`, `README.md`) repository-ის მთავარ საქაღალდეში და აირჩიე არსებული ფაილების ჩანაცვლება.
+4. დააკომიტე ცვლილებები `main` branch-ზე. GitHub Pages ავტომატურად განაახლებს გვერდს რამდენიმე წუთში.
+
+განახლება ამატებს ცალკე განყოფილებას „ჰერეთი, რანი და ალბანეთი“ და ახალ აკადემიურ წყაროებს. საიტი ისტორიული ტერმინების შესახებ განსხვავებულ კვლევით მიდგომებს тэмჩნევს და საზღვრებს არ წარმოადგენს როგორც ყველა ეპოქისთვის უცვლელ ფაქტს.
+
+## კინემატოგრაფიული ანიმაციების ვერსია
+
+განახლებული ვერსია იყენებს GSAP-სა და ScrollTrigger-ს CDN-დან (ინტერნეტკავშირისას) უფრო მაღალი დონის მოძრაობისთვის: სათაურის კინემატოგრაფიული გახსნა, ფენოვანი პარალაქსი, სქროლზე რეაგირებადი სათაურები და ბარათები, რბილი depth ეფექტები და ღილაკების მსუბუქი magnetic ინტერაქცია. თუ GSAP-ის CDN ხელმისაწვდომი არ არის, საიტის ძირითადი სტრუქტურა და CSS ანიმაციები მაინც მუშაობს.
+
+ანიმაციები ითვალისწინებს ბრაუზერის `prefers-reduced-motion` პარამეტრს. დიზაინი რჩება responsive მობილურზე და დიდ ეკრანებზე.
+
+## დამატებული თავები
+- დავით IV აღმაშენებელი და კახეთ-ჰერეთის შემოერთების ქრონოლოგია
+- ჰერეთის 11 კულტურული ძეგლის კატალოგი
+- საინგილოსა და XX საუკუნის საზღვრის ცვლილებების მიმოხილვა
+
+საიტი განკუთვნილია GitHub Pages-ზე განთავსებისთვის. მთავარი ფაილებია `index.html`, `style.css` და `script.js`. გვერდის ანიმაციები იყენებს GSAP-ს CDN-ით, ხოლო ძირითადი სტილი და ილუსტრაციები ჩაშენებულია პროექტში. ისტორიულად სადავო ცნობები საბოლოო აკადემიური გამოყენების წინ გადაამოწმეთ მითითებულ წყაროებთან.
