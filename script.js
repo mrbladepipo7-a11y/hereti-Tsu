@@ -265,4 +265,49 @@
     });
   }
 
+
+  // Monument field-note panels: each site opens its own animated research note.
+  $('.monument-card').forEach((card, index) => {
+    const title = $('h3', card);
+    const description = $('p', card);
+    if (!title || !description) return;
+    const extra = document.createElement('div');
+    extra.className = 'monument-extra';
+    const note = document.createElement('p');
+    note.textContent = 'საველე ჩანაწერი: ' + description.textContent.trim() + ' ძეგლის დათარიღება და ისტორიული გარემო სპეციალიზებულ კვლევებთან უნდა გადამოწმდეს.';
+    extra.appendChild(note);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'monument-expand';
+    button.setAttribute('aria-expanded', 'false');
+    button.innerHTML = '<span aria-hidden="true">+</span> საველე ჩანაწერი / ' + String(index + 1).padStart(2, '0');
+    button.addEventListener('click', () => {
+      const expanded = card.classList.toggle('is-expanded');
+      button.setAttribute('aria-expanded', String(expanded));
+      button.innerHTML = '<span aria-hidden="true">' + (expanded ? '−' : '+') + '</span> ' + (expanded ? 'ჩანაწერის დახურვა' : 'საველე ჩანაწერი / ' + String(index + 1).padStart(2, '0'));
+      if (expanded) {
+        card.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+        extra.classList.add('field-note-open');
+      } else extra.classList.remove('field-note-open');
+    });
+    card.appendChild(button);
+    card.appendChild(extra);
+  });
+
+  // Make the map journey feel like a gradual zoom as each scale enters the viewport.
+  if ('IntersectionObserver' in window && !reducedMotion) {
+    const journeyObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('journey-in-view');
+          journeyObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .22 });
+    $('.journey-stop').forEach((stop, index) => {
+      stop.style.transitionDelay = (index * 110) + 'ms';
+      journeyObserver.observe(stop);
+    });
+  }
+
 })();
