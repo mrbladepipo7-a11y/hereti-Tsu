@@ -266,6 +266,13 @@
   }
 
 
+  // Schematic map point descriptions: the map is an orientation graphic, not a georeferenced map.
+  $('.map-point').forEach(point => {
+    const label = point.getAttribute('aria-label') || point.querySelector('text')?.textContent?.trim() || 'ისტორიული ადგილი';
+    point.setAttribute('title', label + ' — საორიენტაციო მონიშვნა; არა ზუსტი კოორდინატი');
+    point.setAttribute('aria-description', 'სქემატური რუკის საორიენტაციო წერტილი');
+  });
+
   // Monument field-note panels: each site opens its own animated research note.
   $('.monument-card').forEach((card, index) => {
     const title = $('h3', card);
