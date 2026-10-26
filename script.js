@@ -234,3 +234,29 @@
     sections.forEach(section => navObserver.observe(section));
   }
 })();
+
+  // Floating animated Hereti mini-map: collapse/expand control.
+  const floatingMap = $('#floatingMap');
+  const mapToggle = $('#mapToggle');
+  if (floatingMap && mapToggle) {
+    mapToggle.addEventListener('click', () => {
+      const collapsed = floatingMap.classList.toggle('is-collapsed');
+      mapToggle.textContent = collapsed ? '+' : '−';
+      mapToggle.setAttribute('aria-label', collapsed ? 'მინი რუკის გახსნა' : 'მინი რუკის დახურვა');
+    });
+  }
+
+  // Fixed side index follows the section currently in view.
+  const sideLinks = $$('.side-index a');
+  if (sideLinks.length && 'IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        sideLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+      });
+    }, { rootMargin: '-38% 0px -48% 0px', threshold: 0 });
+    sideLinks.forEach(link => {
+      const target = $(link.getAttribute('href'));
+      if (target) sectionObserver.observe(target);
+    });
+  }
